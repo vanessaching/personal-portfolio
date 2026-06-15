@@ -10,54 +10,26 @@
     body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: #F2F0ED; min-height: 100vh; }
 
     /* login */
-    #login-screen {
-      min-height: 100vh; display: flex; align-items: center; justify-content: center;
-    }
-    .login-box {
-      background: white; border-radius: 20px; padding: 48px 40px;
-      width: 360px; box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-    }
+    #login-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .login-box { background: white; border-radius: 20px; padding: 48px 40px; width: 360px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
     .login-box h1 { font-size: 20px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
     .login-box p { font-size: 13px; color: #aaa; margin-bottom: 28px; }
-    .login-box input {
-      width: 100%; background: #F2F0ED; border: none; border-radius: 12px;
-      padding: 14px 18px; font-size: 14px; font-family: inherit; outline: none;
-      margin-bottom: 12px; transition: box-shadow 0.15s;
-    }
+    .login-box input { width: 100%; background: #F2F0ED; border: none; border-radius: 12px; padding: 14px 18px; font-size: 14px; font-family: inherit; outline: none; margin-bottom: 12px; transition: box-shadow 0.15s; }
     .login-box input:focus { box-shadow: 0 0 0 2px #1a1a1a; }
-    .login-box button {
-      width: 100%; background: #1a1a1a; color: white; border: none; border-radius: 999px;
-      padding: 14px; font-size: 14px; font-family: inherit; font-weight: 600; cursor: pointer;
-      transition: opacity 0.15s;
-    }
+    .login-box button { width: 100%; background: #1a1a1a; color: white; border: none; border-radius: 999px; padding: 14px; font-size: 14px; font-family: inherit; font-weight: 600; cursor: pointer; transition: opacity 0.15s; }
     .login-box button:hover { opacity: 0.8; }
     .login-error { font-size: 12px; color: #E63329; margin-top: 8px; display: none; }
 
     /* admin layout */
     #admin-screen { display: none; }
-    .admin-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 20px 48px; background: #F2F0ED; border-bottom: 1px solid #e0ddd9;
-      position: sticky; top: 0; z-index: 10;
-    }
+    .admin-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; background: #F2F0ED; border-bottom: 1px solid #e0ddd9; position: sticky; top: 0; z-index: 10; }
     .admin-header h1 { font-size: 18px; font-weight: 700; color: #1a1a1a; }
     .admin-header p { font-size: 12px; color: #aaa; margin-top: 2px; }
-    .logout-btn {
-      background: none; border: 1px solid #ddd; border-radius: 999px;
-      padding: 7px 16px; font-size: 13px; cursor: pointer; font-family: inherit; color: #555;
-      transition: background 0.15s;
-    }
+    .logout-btn { background: none; border: 1px solid #ddd; border-radius: 999px; padding: 7px 16px; font-size: 13px; cursor: pointer; font-family: inherit; color: #555; transition: background 0.15s; }
     .logout-btn:hover { background: #1a1a1a; color: white; border-color: #1a1a1a; }
 
-    .admin-tabs {
-      display: flex; gap: 0; border-bottom: 1px solid #e0ddd9;
-      padding: 0 48px; background: #F2F0ED;
-    }
-    .tab-btn {
-      background: none; border: none; font-family: inherit; font-size: 13px;
-      color: #aaa; padding: 14px 20px; cursor: pointer; border-bottom: 2px solid transparent;
-      margin-bottom: -1px; transition: color 0.15s;
-    }
+    .admin-tabs { display: flex; gap: 0; border-bottom: 1px solid #e0ddd9; padding: 0 48px; background: #F2F0ED; }
+    .tab-btn { background: none; border: none; font-family: inherit; font-size: 13px; color: #aaa; padding: 14px 20px; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color 0.15s; }
     .tab-btn.active { color: #1a1a1a; border-bottom-color: #1a1a1a; font-weight: 600; }
 
     .tab-content { display: none; padding: 40px 48px; }
@@ -65,91 +37,72 @@
 
     /* sticky notes */
     .notes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
-    .sticky {
-      background: #FFF9C4; border-radius: 4px; padding: 20px;
-      box-shadow: 2px 3px 8px rgba(0,0,0,0.12); position: relative;
-      transform: rotate(var(--r)); min-height: 180px;
-    }
+    .sticky { background: #FFF9C4; border-radius: 4px; padding: 20px; box-shadow: 2px 3px 8px rgba(0,0,0,0.12); position: relative; transform: rotate(var(--r)); min-height: 180px; }
     .sticky .s-name { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
     .sticky .s-email { font-size: 11px; color: #888; margin-bottom: 12px; }
     .sticky .s-subject { font-size: 12px; font-weight: 600; color: #555; margin-bottom: 8px; }
     .sticky .s-msg { font-size: 13px; color: #444; line-height: 1.6; }
     .sticky .s-date { font-size: 10px; color: #aaa; margin-top: 12px; }
-    .sticky .s-delete {
-      position: absolute; top: 10px; right: 12px; background: none; border: none;
-      font-size: 16px; cursor: pointer; color: #aaa; opacity: 0.4; transition: opacity 0.15s;
-    }
+    .sticky .s-delete { position: absolute; top: 10px; right: 12px; background: none; border: none; font-size: 16px; cursor: pointer; color: #aaa; opacity: 0.4; transition: opacity 0.15s; }
     .sticky .s-delete:hover { opacity: 1; color: #E63329; }
     .sticky:nth-child(4n+1) { background: #FFF9C4; --r: -1.2deg; }
     .sticky:nth-child(4n+2) { background: #C8F7C5; --r: 0.8deg; }
     .sticky:nth-child(4n+3) { background: #FADADD; --r: -0.5deg; }
     .sticky:nth-child(4n+0) { background: #C5E8F7; --r: 1.1deg; }
 
-    /* projects */
+    /* projects / experience shared */
     .section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
     .section-head h2 { font-size: 18px; font-weight: 700; color: #1a1a1a; }
-    .add-btn {
-      background: #1a1a1a; color: white; border: none; border-radius: 999px;
-      padding: 10px 22px; font-size: 13px; font-family: inherit; font-weight: 600;
-      cursor: pointer; transition: opacity 0.15s;
-    }
+    .add-btn { background: #1a1a1a; color: white; border: none; border-radius: 999px; padding: 10px 22px; font-size: 13px; font-family: inherit; font-weight: 600; cursor: pointer; transition: opacity 0.15s; }
     .add-btn:hover { opacity: 0.8; }
 
-    .project-list { display: flex; flex-direction: column; gap: 12px; }
-    .project-row {
+    .project-list, .experience-list { display: flex; flex-direction: column; gap: 12px; }
+    .project-row, .experience-row {
       background: white; border-radius: 14px; padding: 20px 24px;
       display: flex; align-items: center; gap: 20px;
       box-shadow: 0 1px 4px rgba(0,0,0,0.06);
     }
-    .project-row .p-img {
+    .project-row .p-img, .experience-row .e-img {
       width: 64px; height: 48px; background: #ECEAE6; border-radius: 8px;
-      object-fit: cover; flex-shrink: 0;
+      object-fit: cover; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
     }
-    .project-row .p-info { flex: 1; }
-    .project-row .p-title { font-size: 14px; font-weight: 700; color: #1a1a1a; }
-    .project-row .p-desc { font-size: 12px; color: #aaa; margin-top: 3px; }
-    .project-row .p-year { font-size: 11px; color: #bbb; }
-    .p-actions { display: flex; gap: 8px; }
-    .edit-btn, .del-btn {
-      border-radius: 999px; padding: 6px 14px; font-size: 12px;
-      font-family: inherit; cursor: pointer; border: 1px solid #ddd; background: none;
-      transition: background 0.15s;
-    }
+    .project-row .p-info, .experience-row .e-info { flex: 1; }
+    .project-row .p-title, .experience-row .e-title { font-size: 14px; font-weight: 700; color: #1a1a1a; }
+    .project-row .p-desc, .experience-row .e-desc { font-size: 12px; color: #aaa; margin-top: 3px; }
+    .project-row .p-year, .experience-row .e-timeline { font-size: 11px; color: #bbb; }
+    .p-actions, .e-actions { display: flex; gap: 8px; }
+    .edit-btn, .del-btn { border-radius: 999px; padding: 6px 14px; font-size: 12px; font-family: inherit; cursor: pointer; border: 1px solid #ddd; background: none; transition: background 0.15s; }
     .edit-btn:hover { background: #1a1a1a; color: white; border-color: #1a1a1a; }
     .del-btn:hover { background: #E63329; color: white; border-color: #E63329; }
 
+    /* drag reorder */
+    .drag-handle {
+      cursor: grab; color: #ccc; font-size: 16px; padding: 0 4px; flex-shrink: 0;
+      user-select: none; transition: color 0.15s; line-height: 1;
+    }
+    .drag-handle:hover { color: #888; }
+    .drag-handle:active { cursor: grabbing; }
+    .project-row.dragging, .experience-row.dragging {
+      opacity: 0.4; background: #f5f3f0;
+    }
+    .project-row.drag-over, .experience-row.drag-over {
+      border-top: 2px solid #1a1a1a;
+    }
+
     /* modal form */
-    .form-modal-overlay {
-      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.3);
-      z-index: 200; align-items: center; justify-content: center; backdrop-filter: blur(4px);
-    }
+    .form-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 200; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
     .form-modal-overlay.open { display: flex; }
-    .form-modal {
-      background: #F2F0ED; border-radius: 20px; padding: 40px; width: 520px;
-      max-width: 90vw; max-height: 90vh; overflow-y: auto; position: relative;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-    }
+    .form-modal { background: #F2F0ED; border-radius: 20px; padding: 40px; width: 520px; max-width: 90vw; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
     .form-modal h3 { font-size: 18px; font-weight: 700; margin-bottom: 24px; }
-    .form-modal .close-x {
-      position: absolute; top: 18px; right: 22px; background: none; border: none;
-      font-size: 15px; color: #bbb; cursor: pointer;
-    }
+    .form-modal .close-x { position: absolute; top: 18px; right: 22px; background: none; border: none; font-size: 15px; color: #bbb; cursor: pointer; }
     .f-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
     .f-label { font-size: 12px; font-weight: 700; color: #1a1a1a; }
-    .f-input, .f-textarea {
-      background: white; border: 1px solid #e0ddd9; border-radius: 10px;
-      padding: 12px 14px; font-size: 14px; font-family: inherit; outline: none;
-      transition: border-color 0.15s;
-    }
+    .f-input, .f-textarea { background: white; border: 1px solid #e0ddd9; border-radius: 10px; padding: 12px 14px; font-size: 14px; font-family: inherit; outline: none; transition: border-color 0.15s; }
     .f-input:focus, .f-textarea:focus { border-color: #1a1a1a; }
     .f-textarea { resize: vertical; min-height: 80px; }
     .f-hint { font-size: 11px; color: #aaa; }
     .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .save-btn {
-      width: 100%; background: #1a1a1a; color: white; border: none; border-radius: 999px;
-      padding: 14px; font-size: 14px; font-family: inherit; font-weight: 600;
-      cursor: pointer; margin-top: 8px; transition: opacity 0.15s;
-    }
+    .save-btn { width: 100%; background: #1a1a1a; color: white; border: none; border-radius: 999px; padding: 14px; font-size: 14px; font-family: inherit; font-weight: 600; cursor: pointer; margin-top: 8px; transition: opacity 0.15s; }
     .save-btn:hover { opacity: 0.8; }
     .featured-check { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #555; }
     .featured-check input { width: 16px; height: 16px; cursor: pointer; }
@@ -157,11 +110,7 @@
     /* content editor */
     .content-section { background: white; border-radius: 16px; padding: 28px 32px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
     .content-section h3 { font-size: 15px; font-weight: 700; color: #1a1a1a; margin-bottom: 20px; }
-    .update-btn {
-      background: #1a1a1a; color: white; border: none; border-radius: 999px;
-      padding: 10px 22px; font-size: 13px; font-family: inherit; font-weight: 600;
-      cursor: pointer; margin-top: 12px; transition: opacity 0.15s;
-    }
+    .update-btn { background: #1a1a1a; color: white; border: none; border-radius: 999px; padding: 10px 22px; font-size: 13px; font-family: inherit; font-weight: 600; cursor: pointer; margin-top: 12px; transition: opacity 0.15s; }
     .update-btn:hover { opacity: 0.8; }
     .success-msg { font-size: 12px; color: #2E9E3F; margin-top: 8px; display: none; }
 
@@ -171,19 +120,19 @@
 </head>
 <body>
 
-<!-- LOGIN -->
+<!-- login -->
 <div id="login-screen">
   <div class="login-box">
     <h1>vanessa ching</h1>
     <p>admin access only</p>
-    <input type="email" id="email-input" placeholder="email" onkeydown="if(event.key==='Enter')login()" style="margin-bottom:12px;width:100%;background:#F2F0ED;border:none;border-radius:12px;padding:14px 18px;font-size:14px;font-family:inherit;outline:none;" />
+    <input type="email" id="email-input" placeholder="email" onkeydown="if(event.key==='Enter')login()" />
     <input type="password" id="password-input" placeholder="password" onkeydown="if(event.key==='Enter')login()" />
     <button onclick="login()">enter</button>
     <p class="login-error" id="login-error">wrong password</p>
   </div>
 </div>
 
-<!-- ADMIN -->
+<!-- admin -->
 <div id="admin-screen">
   <div class="admin-header">
     <div>
@@ -194,91 +143,80 @@
   </div>
 
   <div class="admin-tabs">
-    <button class="tab-btn active" onclick="switchTab('notes')">contact notes</button>
-    <button class="tab-btn" onclick="switchTab('projects')">projects</button>
-    <button class="tab-btn" onclick="switchTab('content')">content</button>
+    <button class="tab-btn active" onclick="switchTab('notes', this)">contact notes</button>
+    <button class="tab-btn" onclick="switchTab('projects', this)">projects</button>
+    <button class="tab-btn" onclick="switchTab('experience', this)">experience</button>
+    <button class="tab-btn" onclick="switchTab('content', this)">content</button>
   </div>
 
-  <!-- NOTES TAB -->
+  <!-- note tab -->
   <div id="tab-notes" class="tab-content active">
     <div class="section-head">
       <h2>contact notes</h2>
       <button class="add-btn" style="background:#E63329;" onclick="clearAllNotes()">clear all</button>
     </div>
-    <div id="notes-grid" class="notes-grid">
-      <div class="loading">loading notes...</div>
-    </div>
+    <div id="notes-grid" class="notes-grid"><div class="loading">loading notes...</div></div>
   </div>
 
-  <!-- PROJECTS TAB -->
+  <!-- project tab -->
   <div id="tab-projects" class="tab-content">
     <div class="section-head">
       <h2>projects</h2>
       <button class="add-btn" onclick="openProjectModal()">+ add project</button>
     </div>
-    <div id="project-list" class="project-list">
-      <div class="loading">loading projects...</div>
-    </div>
+    <div id="project-list" class="project-list"><div class="loading">loading projects...</div></div>
   </div>
 
-  <!-- CONTENT TAB -->
+  <!-- experience tab -->
+  <div id="tab-experience" class="tab-content">
+    <div class="section-head">
+      <h2>experience</h2>
+      <button class="add-btn" onclick="openExperienceModal()">+ add experience</button>
+    </div>
+    <div id="experience-list" class="experience-list"><div class="loading">loading experience...</div></div>
+  </div>
+
+  <!-- content tab -->
   <div id="tab-content" class="tab-content">
     <div class="content-section">
       <h3>bio</h3>
-      <div class="f-group">
-        <label class="f-label">about me text</label>
-        <textarea class="f-textarea" id="bio-text" style="min-height:120px;"></textarea>
-      </div>
+      <div class="f-group"><label class="f-label">about me text</label><textarea class="f-textarea" id="bio-text" style="min-height:120px;"></textarea></div>
       <button class="update-btn" onclick="updateContent('bio')">save bio</button>
       <p class="success-msg" id="bio-success">saved!</p>
     </div>
-
     <div class="content-section">
       <h3>links</h3>
       <div class="f-row">
         <div class="f-group"><label class="f-label">linkedin url</label><input class="f-input" id="linkedin-url" type="url" /></div>
         <div class="f-group"><label class="f-label">github url</label><input class="f-input" id="github-url" type="url" /></div>
       </div>
-      <div class="f-group"><label class="f-label">resume url</label><input class="f-input" id="resume-url" type="url" placeholder="link to your resume pdf" /></div>
+      <div class="f-group"><label class="f-label">resume url</label><input class="f-input" id="resume-url" type="url" /></div>
       <button class="update-btn" onclick="updateContent('links')">save links</button>
       <p class="success-msg" id="links-success">saved!</p>
     </div>
-
     <div class="content-section">
       <h3>photos</h3>
       <div class="f-row">
-        <div class="f-group">
-          <label class="f-label">normal mode photo filename</label>
-          <input class="f-input" id="normal-photo" placeholder="e.g. photo.jpg" />
-          <span class="f-hint">place the file in your /images/ folder</span>
-        </div>
-        <div class="f-group">
-          <label class="f-label">fun mode photo filename</label>
-          <input class="f-input" id="fun-photo" placeholder="e.g. fun-photo.png" />
-          <span class="f-hint">transparent png recommended</span>
-        </div>
+        <div class="f-group"><label class="f-label">normal mode photo filename</label><input class="f-input" id="normal-photo" placeholder="e.g. photo.jpg" /><span class="f-hint">place in /images/</span></div>
+        <div class="f-group"><label class="f-label">fun mode photo filename</label><input class="f-input" id="fun-photo" placeholder="e.g. fun-photo.png" /><span class="f-hint">transparent png recommended</span></div>
       </div>
       <button class="update-btn" onclick="updateContent('photos')">save photos</button>
       <p class="success-msg" id="photos-success">saved!</p>
     </div>
-
     <div class="content-section">
       <h3>featured project (fun mode cart)</h3>
-      <div class="f-group">
-        <label class="f-label">featured project title</label>
-        <input class="f-input" id="featured-title" placeholder="e.g. f1 fantasy optimizer" />
-      </div>
+      <div class="f-group"><label class="f-label">featured project title</label><input class="f-input" id="featured-title" /></div>
       <button class="update-btn" onclick="updateContent('featured')">save</button>
       <p class="success-msg" id="featured-success">saved!</p>
     </div>
   </div>
 </div>
 
-<!-- PROJECT FORM MODAL -->
+<!-- project form modal -->
 <div class="form-modal-overlay" id="project-modal">
   <div class="form-modal">
     <button class="close-x" onclick="closeProjectModal()">✕</button>
-    <h3 id="modal-title">add project</h3>
+    <h3 id="modal-title-proj">add project</h3>
     <input type="hidden" id="editing-id" />
     <div class="f-row">
       <div class="f-group"><label class="f-label">title</label><input class="f-input" id="p-title" placeholder="project name" /></div>
@@ -286,47 +224,50 @@
     </div>
     <div class="f-group"><label class="f-label">short description</label><input class="f-input" id="p-desc" placeholder="tools, stack, one liner" /></div>
     <div class="f-group"><label class="f-label">full description</label><textarea class="f-textarea" id="p-long-desc" placeholder="longer description shown in the modal"></textarea></div>
-    <div class="f-group">
-      <label class="f-label">image filename</label>
-      <input class="f-input" id="p-image" placeholder="e.g. f1-optimizer.jpg" />
-      <span class="f-hint">place the file in your /images/ folder</span>
-    </div>
+    <div class="f-group"><label class="f-label">image filename</label><input class="f-input" id="p-image" placeholder="e.g. f1-optimizer.jpg" /><span class="f-hint">place in /images/</span></div>
     <div class="f-group"><label class="f-label">repo url</label><input class="f-input" id="p-repo" placeholder="https://github.com/..." /></div>
-    <div class="f-group">
-      <label class="f-label">cat image filename (fun mode)</label>
-      <input class="f-input" id="p-cat" placeholder="e.g. cat-orange.png" />
-      <span class="f-hint">transparent png of your cat drawing</span>
-    </div>
+    <div class="f-group"><label class="f-label">cat image filename (fun mode)</label><input class="f-input" id="p-cat" placeholder="e.g. cat-orange.png" /><span class="f-hint">transparent png of your cat drawing</span></div>
     <div class="f-row">
-      <div class="f-group">
-        <label class="f-label">grid column (1–7)</label>
-        <input class="f-input" id="p-col" type="number" min="1" max="7" placeholder="1" />
-      </div>
-      <div class="f-group">
-        <label class="f-label">grid row (1–4)</label>
-        <input class="f-input" id="p-row" type="number" min="1" max="4" placeholder="1" />
-      </div>
+      <div class="f-group"><label class="f-label">grid column (1–7)</label><input class="f-input" id="p-col" type="number" min="1" max="7" placeholder="1" /></div>
+      <div class="f-group"><label class="f-label">grid row (1–4)</label><input class="f-input" id="p-row" type="number" min="1" max="4" placeholder="1" /></div>
     </div>
-    <div class="f-group">
-      <label class="featured-check">
-        <input type="checkbox" id="p-featured" />
-        featured project (shows in fun mode cart)
-      </label>
-    </div>
+    <div class="f-group"><label class="featured-check"><input type="checkbox" id="p-featured" /> featured project (shows in fun mode cart)</label></div>
     <button class="save-btn" onclick="saveProject()">save project</button>
   </div>
 </div>
 
+<!-- experience form modal -->
+<div class="form-modal-overlay" id="experience-modal">
+  <div class="form-modal">
+    <button class="close-x" onclick="closeExperienceModal()">✕</button>
+    <h3 id="modal-title-exp">add experience</h3>
+    <input type="hidden" id="editing-exp-id" />
+    <div class="f-row">
+      <div class="f-group"><label class="f-label">role / title</label><input class="f-input" id="e-role" placeholder="Software Engineer Intern" /></div>
+      <div class="f-group"><label class="f-label">company</label><input class="f-input" id="e-company" placeholder="Company Name" /></div>
+    </div>
+    <div class="f-group"><label class="f-label">timeline</label><input class="f-input" id="e-timeline" placeholder="Summer 2025 · or · Jan 2024 – May 2024" /></div>
+    <div class="f-group"><label class="f-label">short description</label><input class="f-input" id="e-desc" placeholder="tools, skills, one liner" /></div>
+    <div class="f-group"><label class="f-label">full description</label><textarea class="f-textarea" id="e-long-desc" placeholder="longer description shown in the modal"></textarea></div>
+    <div class="f-group"><label class="f-label">image filename (normal mode)</label><input class="f-input" id="e-image" placeholder="e.g. gtri-logo.jpg" /><span class="f-hint">company logo or photo — place in /images/</span></div>
+    <div class="f-group"><label class="f-label">fun mode object image filename</label><input class="f-input" id="e-fun-image" placeholder="e.g. briefcase-doodle.png" /><span class="f-hint">your custom object drawing — transparent png</span></div>
+    <div class="f-row">
+      <div class="f-group"><label class="f-label">grid column (1–7)</label><input class="f-input" id="e-col" type="number" min="1" max="7" placeholder="1" /></div>
+      <div class="f-group"><label class="f-label">grid row (1–4)</label><input class="f-input" id="e-row" type="number" min="1" max="4" placeholder="1" /></div>
+    </div>
+    <div class="f-group"><label class="f-label">sort order</label><input class="f-input" id="e-sort" type="number" min="0" placeholder="0 = first" /><span class="f-hint">controls order in normal mode grid</span></div>
+    <button class="save-btn" onclick="saveExperience()">save experience</button>
+  </div>
+</div>
+
 <script>
-  // ── CONFIG — paste your Supabase credentials here ──
   const SUPABASE_URL = 'https://gbacrtxsipblfbltjhdc.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdiYWNydHhzaXBibGZibHRqaGRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1MzI5NjksImV4cCI6MjA5NzEwODk2OX0.um4kTrL0KvGMASmkDHz6H36O1C4V9irUuawnmbxyGI0';
-  // ────────────────────────────────────────────────────
 
   const { createClient } = supabase;
   const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  // LOGIN
+  // login
   async function login() {
     const email = document.getElementById('email-input').value;
     const pw = document.getElementById('password-input').value;
@@ -337,8 +278,7 @@
     } else {
       document.getElementById('login-screen').style.display = 'none';
       document.getElementById('admin-screen').style.display = 'block';
-      loadNotes();
-      loadContent();
+      loadNotes(); loadContent();
     }
   }
 
@@ -350,37 +290,33 @@
     document.getElementById('email-input').value = '';
   }
 
-  // check if already logged in on page load
   window.addEventListener('load', async () => {
     const { data: { session } } = await db.auth.getSession();
     if (session) {
       document.getElementById('login-screen').style.display = 'none';
       document.getElementById('admin-screen').style.display = 'block';
-      loadNotes();
-      loadContent();
+      loadNotes(); loadContent();
     }
   });
 
-  // TABS
-  function switchTab(name) {
+  // tabs
+  function switchTab(name, btn) {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-    event.target.classList.add('active');
+    btn.classList.add('active');
     document.getElementById('tab-' + name).classList.add('active');
     if (name === 'notes') loadNotes();
     if (name === 'projects') loadProjects();
+    if (name === 'experience') loadExperience();
     if (name === 'content') loadContent();
   }
 
-  // NOTES
+  // notes
   async function loadNotes() {
     const grid = document.getElementById('notes-grid');
     grid.innerHTML = '<div class="loading">loading...</div>';
     const { data, error } = await db.from('contact_notes').select('*').order('created_at', { ascending: false });
-    if (error || !data.length) {
-      grid.innerHTML = '<div class="empty-state">no notes yet</div>';
-      return;
-    }
+    if (error || !data.length) { grid.innerHTML = '<div class="empty-state">no notes yet</div>'; return; }
     grid.innerHTML = data.map(n => `
       <div class="sticky">
         <button class="s-delete" onclick="deleteNote('${n.id}')">✕</button>
@@ -388,35 +324,39 @@
         <div class="s-email">${n.email}${n.phone ? ' · ' + n.phone : ''}</div>
         <div class="s-subject">${n.subject}</div>
         <div class="s-msg">${n.message}</div>
-        <div class="s-date">${new Date(n.created_at).toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'})}</div>
-      </div>
-    `).join('');
+        <div class="s-date">${new Date(n.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>
+      </div>`).join('');
   }
 
   async function deleteNote(id) {
     if (!confirm('delete this note?')) return;
-    await db.from('contact_notes').delete().eq('id', id);
-    loadNotes();
+    await db.from('contact_notes').delete().eq('id', id); loadNotes();
   }
 
   async function clearAllNotes() {
     if (!confirm('delete all contact notes? this cannot be undone.')) return;
-    await db.from('contact_notes').delete().neq('id', '00000000-0000-0000-0000-000000000000');
-    loadNotes();
+    await db.from('contact_notes').delete().neq('id', '00000000-0000-0000-0000-000000000000'); loadNotes();
   }
 
-  // PROJECTS
+  // projects
+  let projectData = [];
+
   async function loadProjects() {
     const list = document.getElementById('project-list');
     list.innerHTML = '<div class="loading">loading...</div>';
-    const { data, error } = await db.from('projects').select('*').order('year', { ascending: false });
-    if (error || !data.length) {
-      list.innerHTML = '<div class="empty-state">no projects yet — add one</div>';
-      return;
-    }
-    list.innerHTML = data.map(p => `
-      <div class="project-row">
-        <div class="p-img" style="background:#ECEAE6;display:flex;align-items:center;justify-content:center;font-size:20px;">${p.image ? `<img src="images/${p.image}" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">` : ''}</div>
+    const { data, error } = await db.from('projects').select('*').order('sort_order', { ascending: true }).order('year', { ascending: false });
+    if (error || !data || !data.length) { list.innerHTML = '<div class="empty-state">no projects yet — add one</div>'; return; }
+    projectData = data;
+    renderProjectList();
+  }
+
+  function renderProjectList() {
+    const list = document.getElementById('project-list');
+    list.innerHTML = projectData.map((p, i) => `
+      <div class="project-row" draggable="true" data-index="${i}" data-id="${p.id}"
+           ondragstart="onDragStart(event,'project')" ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event,'project')" ondragend="onDragEnd(event,'project')">
+        <span class="drag-handle" title="drag to reorder">⠿</span>
+        <div class="p-img">${p.image ? `<img src="images/${p.image}" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">` : ''}</div>
         <div class="p-info">
           <div class="p-title">${p.title}${p.featured ? ' (featured)' : ''}</div>
           <div class="p-desc">${p.description}</div>
@@ -426,12 +366,17 @@
           <button class="edit-btn" onclick="editProject(${JSON.stringify(p).replace(/"/g,'&quot;')})">edit</button>
           <button class="del-btn" onclick="deleteProject('${p.id}')">delete</button>
         </div>
-      </div>
-    `).join('');
+      </div>`).join('');
+  }
+
+  async function saveProjectOrder() {
+    await Promise.all(projectData.map((p, i) =>
+      db.from('projects').update({ sort_order: i }).eq('id', p.id)
+    ));
   }
 
   function openProjectModal(p) {
-    document.getElementById('modal-title').textContent = p ? 'edit project' : 'add project';
+    document.getElementById('modal-title-proj').textContent = p ? 'edit project' : 'add project';
     document.getElementById('editing-id').value = p?.id || '';
     document.getElementById('p-title').value = p?.title || '';
     document.getElementById('p-year').value = p?.year || '';
@@ -462,23 +407,99 @@
       grid_col: parseInt(document.getElementById('p-col').value) || 1,
       grid_row: parseInt(document.getElementById('p-row').value) || 1,
       featured: document.getElementById('p-featured').checked,
+      sort_order: id ? undefined : projectData.length, // new items go to end
     };
-    if (id) {
-      await db.from('projects').update(payload).eq('id', id);
-    } else {
-      await db.from('projects').insert(payload);
-    }
-    closeProjectModal();
-    loadProjects();
+    if (id) { await db.from('projects').update(payload).eq('id', id); }
+    else { await db.from('projects').insert(payload); }
+    closeProjectModal(); loadProjects();
   }
 
   async function deleteProject(id) {
     if (!confirm('delete this project?')) return;
-    await db.from('projects').delete().eq('id', id);
-    loadProjects();
+    await db.from('projects').delete().eq('id', id); loadProjects();
   }
 
-  // CONTENT
+  // experience
+  let experienceData = [];
+
+  async function loadExperience() {
+    const list = document.getElementById('experience-list');
+    list.innerHTML = '<div class="loading">loading...</div>';
+    const { data, error } = await db.from('experience').select('*').order('sort_order', { ascending: true });
+    if (error || !data || !data.length) { list.innerHTML = '<div class="empty-state">no experience yet — add one</div>'; return; }
+    experienceData = data;
+    renderExperienceList();
+  }
+
+  function renderExperienceList() {
+    const list = document.getElementById('experience-list');
+    list.innerHTML = experienceData.map((e, i) => `
+      <div class="experience-row" draggable="true" data-index="${i}" data-id="${e.id}"
+           ondragstart="onDragStart(event,'experience')" ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event,'experience')" ondragend="onDragEnd(event,'experience')">
+        <span class="drag-handle" title="drag to reorder">⠿</span>
+        <div class="e-img">${e.image ? `<img src="images/${e.image}" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">` : ''}</div>
+        <div class="e-info">
+          <div class="e-title">${e.role} · ${e.company}</div>
+          <div class="e-desc">${e.description}</div>
+          <div class="e-timeline">${e.timeline}</div>
+        </div>
+        <div class="e-actions">
+          <button class="edit-btn" onclick="editExperience(${JSON.stringify(e).replace(/"/g,'&quot;')})">edit</button>
+          <button class="del-btn" onclick="deleteExperience('${e.id}')">delete</button>
+        </div>
+      </div>`).join('');
+  }
+
+  async function saveExperienceOrder() {
+    await Promise.all(experienceData.map((e, i) =>
+      db.from('experience').update({ sort_order: i }).eq('id', e.id)
+    ));
+  }
+
+  function openExperienceModal(e) {
+    document.getElementById('modal-title-exp').textContent = e ? 'edit experience' : 'add experience';
+    document.getElementById('editing-exp-id').value = e?.id || '';
+    document.getElementById('e-role').value = e?.role || '';
+    document.getElementById('e-company').value = e?.company || '';
+    document.getElementById('e-timeline').value = e?.timeline || '';
+    document.getElementById('e-desc').value = e?.description || '';
+    document.getElementById('e-long-desc').value = e?.long_description || '';
+    document.getElementById('e-image').value = e?.image || '';
+    document.getElementById('e-fun-image').value = e?.fun_image || '';
+    document.getElementById('e-col').value = e?.grid_col || '';
+    document.getElementById('e-row').value = e?.grid_row || '';
+    document.getElementById('e-sort').value = e?.sort_order ?? '';
+    document.getElementById('experience-modal').classList.add('open');
+  }
+
+  function editExperience(e) { openExperienceModal(e); }
+  function closeExperienceModal() { document.getElementById('experience-modal').classList.remove('open'); }
+
+  async function saveExperience() {
+    const id = document.getElementById('editing-exp-id').value;
+    const payload = {
+      role: document.getElementById('e-role').value,
+      company: document.getElementById('e-company').value,
+      timeline: document.getElementById('e-timeline').value,
+      description: document.getElementById('e-desc').value,
+      long_description: document.getElementById('e-long-desc').value,
+      image: document.getElementById('e-image').value,
+      fun_image: document.getElementById('e-fun-image').value,
+      grid_col: parseInt(document.getElementById('e-col').value) || 1,
+      grid_row: parseInt(document.getElementById('e-row').value) || 1,
+      sort_order: parseInt(document.getElementById('e-sort').value) || 0,
+    };
+    if (id) { await db.from('experience').update(payload).eq('id', id); }
+    else { await db.from('experience').insert(payload); }
+    closeExperienceModal(); loadExperience();
+  }
+
+  async function deleteExperience(id) {
+    if (!confirm('delete this experience?')) return;
+    await db.from('experience').delete().eq('id', id); loadExperience();
+  }
+
+  // content
   async function loadContent() {
     const { data } = await db.from('site_content').select('*');
     if (!data) return;
@@ -515,8 +536,61 @@
   }
 
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeProjectModal();
+    if (e.key === 'Escape') { closeProjectModal(); closeExperienceModal(); }
   });
+
+  // ── drag to reorder ──
+  let dragSrcIndex = null;
+  let dragType = null;
+
+  function onDragStart(event, type) {
+    // don't start drag from buttons
+    if (event.target.tagName === 'BUTTON') { event.preventDefault(); return; }
+    dragType = type;
+    const row = event.currentTarget;
+    dragSrcIndex = parseInt(row.dataset.index);
+    row.classList.add('dragging');
+    event.dataTransfer.effectAllowed = 'move';
+    event.dataTransfer.setData('text/plain', dragSrcIndex);
+  }
+
+  function onDragOver(event) {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'move';
+    event.currentTarget.classList.add('drag-over');
+  }
+
+  function onDragLeave(event) {
+    event.currentTarget.classList.remove('drag-over');
+  }
+
+  function onDrop(event, type) {
+    event.preventDefault();
+    event.currentTarget.classList.remove('drag-over');
+    if (type !== dragType) return;
+    const destIndex = parseInt(event.currentTarget.dataset.index);
+    if (dragSrcIndex === null || dragSrcIndex === destIndex) return;
+
+    const arr = type === 'project' ? projectData : experienceData;
+    const [moved] = arr.splice(dragSrcIndex, 1);
+    arr.splice(destIndex, 0, moved);
+
+    if (type === 'project') {
+      renderProjectList();
+      saveProjectOrder();
+    } else {
+      renderExperienceList();
+      saveExperienceOrder();
+    }
+    dragSrcIndex = null;
+  }
+
+  function onDragEnd(event, type) {
+    dragSrcIndex = null;
+    document.querySelectorAll('.project-row, .experience-row').forEach(r => {
+      r.classList.remove('dragging', 'drag-over');
+    });
+  }
 </script>
 </body>
 </html>

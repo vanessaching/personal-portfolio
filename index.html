@@ -18,7 +18,7 @@
     body.fun-active .normal-mode { display: none; }
     body.fun-active .fun-mode { display: block; }
 
-    /* ── SHARED ── */
+    /* ── shared ── */
     .section-label {
       font-size: 20px;
       font-weight: 700;
@@ -58,8 +58,9 @@
     .modal-body { font-size: 14px; color: #777; line-height: 1.75; margin-bottom: 32px; }
     .modal-repo { font-size: 13px; color: #1a1a1a; text-decoration: none; border-bottom: 1px solid #ccc; padding-bottom: 2px; }
     .modal-repo:hover { color: #888; border-color: #aaa; }
+    .modal-repo.hidden { display: none; }
 
-    /* ── NORMAL MODE ── */
+    /* ── normal mode ── */
     .normal-mode { display: block; }
 
     /* header */
@@ -101,10 +102,28 @@
     }
     .project-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.11); transform: translateY(-3px); }
     .project-img { width: 100%; height: 180px; background: #dedad4; }
+    .project-img img { width: 100%; height: 100%; object-fit: cover; }
     .project-info { padding: 18px 20px 22px; }
     .project-year { font-size: 11px; color: #bbb; letter-spacing: 0.06em; text-transform: uppercase; }
     .project-title { font-size: 15px; font-weight: 600; color: #1a1a1a; margin: 6px 0 5px; }
     .project-desc { font-size: 12px; color: #aaa; }
+
+    /* ── experience ── */
+    .n-experience { padding: 64px 48px; border-top: 1px solid #e0ddd9; }
+    .experience-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .experience-card {
+      background: #ECEAE6; border-radius: 16px; overflow: hidden;
+      cursor: pointer; transition: box-shadow 0.2s, transform 0.2s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    }
+    .experience-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.11); transform: translateY(-3px); }
+    .experience-img { width: 100%; height: 180px; background: #dedad4; display: flex; align-items: center; justify-content: center; }
+    .experience-img img { width: 100%; height: 100%; object-fit: cover; }
+    .experience-info { padding: 18px 20px 22px; }
+    .experience-timeline { font-size: 11px; color: #bbb; letter-spacing: 0.06em; text-transform: uppercase; }
+    .experience-role { font-size: 15px; font-weight: 600; color: #1a1a1a; margin: 6px 0 2px; }
+    .experience-company { font-size: 13px; font-weight: 500; color: #888; margin-bottom: 5px; }
+    .experience-desc { font-size: 12px; color: #aaa; }
 
     /* about */
     .n-about { padding: 64px 48px; border-top: 1px solid #e0ddd9; }
@@ -158,7 +177,7 @@
     }
     .form-submit:hover { opacity: 0.8; transform: translateY(-1px); }
 
-    /* ── FUN MODE ── */
+    /* ── fun mode ── */
     .fun-mode { display: none; }
 
     .f-cart-wrap {
@@ -234,6 +253,38 @@
     .cat-tooltip .tip-sub { font-size: 10px; color: rgba(255,255,255,0.8); }
     .cat-cell:hover .cat-tooltip { display: block; }
 
+    /* ── experience ── */
+    .f-experience { padding: 48px 48px; border-top: 2px solid #F4A7C0; }
+    .exp-house-wrap {
+      position: relative; width: 100%; aspect-ratio: 7/4;
+      background: #FBCFDD; border-radius: 20px; overflow: hidden; border: 2px dashed #F4A7C0;
+    }
+    .exp-house-placeholder {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: #C2557A;
+    }
+    .exp-grid {
+      position: absolute; inset: 0;
+      display: grid; grid-template-columns: repeat(7,1fr); grid-template-rows: repeat(4,1fr);
+    }
+    .exp-cell { display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; }
+    .exp-obj {
+      width: 70%; aspect-ratio: 1; background: #FBCFDD; border-radius: 12px;
+      border: 2px dashed #F4A7C0; display: flex; align-items: center; justify-content: center;
+      font-size: 20px; transition: transform 0.2s; position: relative;
+    }
+    .exp-obj img { width: 100%; height: 100%; object-fit: contain; }
+    .exp-cell:hover .exp-obj { transform: scale(1.15); }
+    .exp-tooltip {
+      display: none; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+      background: #E91E8C; color: white; border-radius: 10px; padding: 8px 12px;
+      font-size: 12px; white-space: nowrap; text-align: center; z-index: 10; pointer-events: none;
+    }
+    .exp-tooltip .tip-title { font-weight: 700; display: block; margin-bottom: 2px; }
+    .exp-tooltip .tip-company { font-size: 11px; color: rgba(255,255,255,0.9); display: block; margin-bottom: 1px; }
+    .exp-tooltip .tip-sub { font-size: 10px; color: rgba(255,255,255,0.8); }
+    .exp-cell:hover .exp-tooltip { display: block; }
+
     .f-about { padding: 48px 48px; border-top: 2px solid #F4A7C0; }
     .f-about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: stretch; }
     .frame-wrap {
@@ -266,7 +317,7 @@
 </head>
 <body>
 
-<!-- NORMAL MODE -->
+<!-- normal mode -->
 <div class="normal-mode">
   <header class="n-header">
     <div class="identity">
@@ -275,6 +326,7 @@
     </div>
     <nav>
       <a href="#projects">projects</a>
+      <a href="#experience">experience</a>
       <a href="#about">about me</a>
       <a href="#contact">contact</a>
       <div class="divider"></div>
@@ -289,7 +341,7 @@
 
   <section id="projects" class="n-projects">
     <h2 class="section-label">projects</h2>
-    <div class="project-grid">
+    <div class="project-grid" id="project-grid">
       <div class="project-card" onclick="openModal('f1 fantasy optimizer','2024','a FastAPI + React app that optimizes F1 fantasy team selections using live race data and predicted performance metrics.','https://github.com/vanessaching')">
         <div class="project-img"></div>
         <div class="project-info">
@@ -312,6 +364,32 @@
           <span class="project-year">2025</span>
           <h3 class="project-title">UE5 vision pipeline</h3>
           <p class="project-desc">YOLOv8, Python, Unreal Engine 5</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- experience section (normal mode) -->
+  <section id="experience" class="n-experience">
+    <h2 class="section-label">experience</h2>
+    <div class="experience-grid" id="experience-grid">
+      <!-- loaded from supabase; fallback below -->
+      <div class="experience-card" onclick="openModal('AI Computer Vision Intern','Summer 2025','Building a computer vision pipeline using YOLOv8 integrated with Unreal Engine 5 for real-time drone simulation and actor detection at the Georgia Tech Research Institute.','')">
+        <div class="experience-img"></div>
+        <div class="experience-info">
+          <span class="experience-timeline">summer 2025</span>
+          <p class="experience-role">AI Computer Vision Intern</p>
+          <p class="experience-company">Georgia Tech Research Institute</p>
+          <p class="experience-desc">YOLOv8, UE5, Python, simulation</p>
+        </div>
+      </div>
+      <div class="experience-card" onclick="openModal('Undergraduate Researcher','2024 – present','Building sports analytics tools including an AI-powered voice scorekeeper and data pipelines for real-time game tracking, under faculty mentor Anton Dahbura.','')">
+        <div class="experience-img"></div>
+        <div class="experience-info">
+          <span class="experience-timeline">2024 – present</span>
+          <p class="experience-role">Undergraduate Researcher</p>
+          <p class="experience-company">JHU Sports Analytics Research Group</p>
+          <p class="experience-desc">sports analytics, AI, data pipelines</p>
         </div>
       </div>
     </div>
@@ -362,7 +440,7 @@
   </section>
 </div>
 
-<!-- FUN MODE -->
+<!-- fun mode -->
 <div class="fun-mode">
   <div class="f-cart-wrap">
     <div class="f-cart-placeholder">your drawing goes here — favorite project rolling across</div>
@@ -371,6 +449,7 @@
     <div class="f-center">
       <div class="f-nav-left">
         <a href="#f-projects">projects</a>
+        <a href="#f-experience">experience</a>
         <a href="#f-about">about me</a>
       </div>
       <div class="f-name-placeholder">name.png</div>
@@ -390,7 +469,7 @@
     <h2 class="f-section-label">projects</h2>
     <div class="cat-house-wrap">
       <div class="cat-house-placeholder">cat-house.png</div>
-      <div class="cat-grid">
+      <div class="cat-grid" id="cat-grid">
         <div class="cat-cell" onclick="openModal('f1 fantasy optimizer','2024','a FastAPI + React app that optimizes F1 fantasy team selections using live race data and predicted performance metrics.','https://github.com/vanessaching')">
           <div class="cat-img"><div class="cat-tooltip"><span class="tip-title">f1 fantasy optimizer</span><span class="tip-sub">click for more</span></div></div>
         </div>
@@ -399,6 +478,35 @@
         </div>
         <div class="cat-cell" onclick="openModal('UE5 vision pipeline','2025','a computer vision pipeline streaming Unreal Engine 5 viewport frames to YOLOv8 for real-time drone actor detection and control.','https://github.com/vanessaching')">
           <div class="cat-img"><div class="cat-tooltip"><span class="tip-title">UE5 vision pipeline</span><span class="tip-sub">click for more</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- experience section (fun mode) -->
+  <section id="f-experience" class="f-experience">
+    <h2 class="f-section-label">experience</h2>
+    <div class="exp-house-wrap">
+      <div class="exp-house-placeholder">exp-house.png</div>
+      <div class="exp-grid" id="exp-grid">
+        <!-- loaded from supabase; fallback below -->
+        <div class="exp-cell" style="grid-column:1;grid-row:2;" onclick="openModal('AI Computer Vision Intern','Summer 2025','Building a computer vision pipeline using YOLOv8 integrated with Unreal Engine 5 for real-time drone simulation and actor detection at the Georgia Tech Research Institute.','')">
+          <div class="exp-obj">
+            <div class="exp-tooltip">
+              <span class="tip-title">AI CV Intern</span>
+              <span class="tip-company">GTRI</span>
+              <span class="tip-sub">click for more</span>
+            </div>
+          </div>
+        </div>
+        <div class="exp-cell" style="grid-column:3;grid-row:2;" onclick="openModal('Undergraduate Researcher','2024 – present','Building sports analytics tools including an AI-powered voice scorekeeper and data pipelines for real-time game tracking, under faculty mentor Anton Dahbura.','')">
+          <div class="exp-obj">
+            <div class="exp-tooltip">
+              <span class="tip-title">Undergrad Researcher</span>
+              <span class="tip-company">JHU Sports Analytics</span>
+              <span class="tip-sub">click for more</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -424,7 +532,7 @@
   </section>
 </div>
 
-<!-- SHARED MODAL -->
+<!-- shared modal -->
 <div class="modal-overlay" id="modal-overlay" onclick="closeModal()">
   <div class="modal" onclick="event.stopPropagation()">
     <button class="modal-close" onclick="closeModal()">✕</button>
@@ -436,15 +544,13 @@
 </div>
 
 <script>
-  // ── CONFIG — paste your Supabase credentials here ──
   const SUPABASE_URL = 'https://gbacrtxsipblfbltjhdc.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdiYWNydHhzaXBibGZibHRqaGRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1MzI5NjksImV4cCI6MjA5NzEwODk2OX0.um4kTrL0KvGMASmkDHz6H36O1C4V9irUuawnmbxyGI0';
-  // ────────────────────────────────────────────────────
 
   const { createClient } = supabase;
   const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  // ── LOAD CONTENT FROM SUPABASE ──
+  // ── load content from supabase ──
   async function loadSiteContent() {
     const { data } = await db.from('site_content').select('*');
     if (!data) return;
@@ -473,16 +579,15 @@
     }
   }
 
-  // ── LOAD PROJECTS FROM SUPABASE ──
+  // ── load projects from supabase ──
   async function loadProjects() {
-    const { data } = await db.from('projects').select('*').order('year', { ascending: false });
+    const { data } = await db.from('projects').select('*').order('sort_order', { ascending: true }).order('year', { ascending: false });
     if (!data || !data.length) return;
 
-    // normal mode grid
-    const grid = document.querySelector('.project-grid');
+    const grid = document.getElementById('project-grid');
     if (grid) {
       grid.innerHTML = data.map(p => `
-        <div class="project-card" onclick="openModal('${p.title}','${p.year}','${p.long_description || p.description}','${p.repo_url}')">
+        <div class="project-card" onclick="openModal('${esc(p.title)}','${esc(p.year)}','${esc(p.long_description || p.description)}','${esc(p.repo_url)}')">
           <div class="project-img">${p.image ? `<img src="images/${p.image}" style="width:100%;height:100%;object-fit:cover;">` : ''}</div>
           <div class="project-info">
             <span class="project-year">${p.year}</span>
@@ -493,8 +598,7 @@
       `).join('');
     }
 
-    // fun mode cat grid — place cats at grid positions
-    const catGrid = document.querySelector('.cat-grid');
+    const catGrid = document.getElementById('cat-grid');
     if (catGrid) {
       catGrid.innerHTML = '';
       data.forEach(p => {
@@ -516,7 +620,56 @@
     }
   }
 
-  // ── CONTACT FORM ──
+  // ── load experience from supabase ──
+  async function loadExperience() {
+    const { data } = await db.from('experience').select('*').order('sort_order', { ascending: true });
+    if (!data || !data.length) return;
+
+    // normal mode grid
+    const expGrid = document.getElementById('experience-grid');
+    if (expGrid) {
+      expGrid.innerHTML = data.map(e => `
+        <div class="experience-card" onclick="openModal('${esc(e.role)}','${esc(e.timeline)}','${esc(e.long_description || e.description)}','')">
+          <div class="experience-img">${e.image ? `<img src="images/${e.image}">` : ''}</div>
+          <div class="experience-info">
+            <span class="experience-timeline">${e.timeline}</span>
+            <p class="experience-role">${e.role}</p>
+            <p class="experience-company">${e.company}</p>
+            <p class="experience-desc">${e.description}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // fun mode exp grid
+    const expFunGrid = document.getElementById('exp-grid');
+    if (expFunGrid) {
+      expFunGrid.innerHTML = '';
+      data.forEach(e => {
+        const cell = document.createElement('div');
+        cell.className = 'exp-cell';
+        cell.style.gridColumn = e.grid_col || 'auto';
+        cell.style.gridRow = e.grid_row || 'auto';
+        cell.onclick = () => openModal(e.role, e.timeline, e.long_description || e.description, '');
+        cell.innerHTML = `
+          <div class="exp-obj">
+            ${e.fun_image ? `<img src="images/${e.fun_image}">` : ''}
+            <div class="exp-tooltip">
+              <span class="tip-title">${e.role}</span>
+              <span class="tip-company">${e.company}</span>
+              <span class="tip-sub">click for more</span>
+            </div>
+          </div>`;
+        expFunGrid.appendChild(cell);
+      });
+    }
+  }
+
+  function esc(str) {
+    return (str || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+  }
+
+  // ── contact form ──
   async function submitContact() {
     const name = document.getElementById('c-name')?.value;
     const subject = document.getElementById('c-subject')?.value;
@@ -524,20 +677,21 @@
     const phone = document.getElementById('c-phone')?.value;
     const message = document.getElementById('c-message')?.value;
     if (!name || !email || !message) return alert('please fill in name, email, and message');
-
     await db.from('contact_notes').insert({ name, subject, email, phone, message });
     alert('sent! thanks for reaching out!');
     document.querySelectorAll('.form-input').forEach(el => el.value = '');
   }
 
-  // ── TOGGLE ──
+  // ── toggle ──
   var sectionMap = {
-    'projects': 'f-projects', 'about': 'f-about', 'contact': 'f-contact',
-    'f-projects': 'projects', 'f-about': 'about', 'f-contact': 'contact'
+    'projects': 'f-projects', 'experience': 'f-experience', 'about': 'f-about', 'contact': 'f-contact',
+    'f-projects': 'projects', 'f-experience': 'experience', 'f-about': 'about', 'f-contact': 'contact'
   };
 
   function getCurrentSection(mode) {
-    const ids = mode === 'normal' ? ['projects','about','contact'] : ['f-projects','f-about','f-contact'];
+    const ids = mode === 'normal'
+      ? ['projects','experience','about','contact']
+      : ['f-projects','f-experience','f-about','f-contact'];
     let current = ids[0];
     for (const id of ids) {
       const el = document.getElementById(id);
@@ -565,7 +719,13 @@
     document.getElementById('modal-title').textContent = title;
     document.getElementById('modal-year').textContent = year;
     document.getElementById('modal-desc').textContent = desc;
-    document.getElementById('modal-repo').href = repo;
+    const repoEl = document.getElementById('modal-repo');
+    if (repo) {
+      repoEl.href = repo;
+      repoEl.classList.remove('hidden');
+    } else {
+      repoEl.classList.add('hidden');
+    }
     document.getElementById('modal-overlay').classList.add('open');
   }
 
@@ -585,6 +745,7 @@
   window.addEventListener('load', () => {
     loadSiteContent();
     loadProjects();
+    loadExperience();
   });
 </script>
 </body>
