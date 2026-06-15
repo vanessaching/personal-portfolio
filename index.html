@@ -437,8 +437,8 @@
 
 <script>
   // ── CONFIG — paste your Supabase credentials here ──
-  const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-  const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+  const SUPABASE_URL = 'https://gbacrtxsipblfbltjhdc.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdiYWNydHhzaXBibGZibHRqaGRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1MzI5NjksImV4cCI6MjA5NzEwODk2OX0.um4kTrL0KvGMASmkDHz6H36O1C4V9irUuawnmbxyGI0';
   // ────────────────────────────────────────────────────
 
   const { createClient } = supabase;
@@ -531,7 +531,7 @@
   }
 
   // ── TOGGLE ──
-  const sectionMap = {
+  var sectionMap = {
     'projects': 'f-projects', 'about': 'f-about', 'contact': 'f-contact',
     'f-projects': 'projects', 'f-about': 'about', 'f-contact': 'contact'
   };
