@@ -568,7 +568,7 @@
     const normalPhoto = get('normal_photo');
     if (normalPhoto) {
       const ph = document.querySelector('.photo-placeholder');
-      if (ph) ph.innerHTML = `<img src="images/${normalPhoto}" style="width:100%;height:100%;object-fit:cover;border-radius:20px;">`;
+      if (ph) ph.innerHTML = `<img src="images/${normalPhoto}" style="width:60%;object-fit:contain;border-radius:20px;">`;
     }
 
     const featuredTitle = get('featured_title');
