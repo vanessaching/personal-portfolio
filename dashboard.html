@@ -63,7 +63,7 @@
     .tab-content { display: none; padding: 40px 48px; }
     .tab-content.active { display: block; }
 
-    /* sticky notes for contact inbox */
+    /* sticky notes */
     .notes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
     .sticky {
       background: #FFF9C4; border-radius: 4px; padding: 20px;
@@ -171,7 +171,7 @@
 </head>
 <body>
 
-<!-- login -->
+<!-- LOGIN -->
 <div id="login-screen">
   <div class="login-box">
     <h1>vanessa ching</h1>
@@ -183,7 +183,7 @@
   </div>
 </div>
 
-<!-- admin -->
+<!-- ADMIN -->
 <div id="admin-screen">
   <div class="admin-header">
     <div>
@@ -194,12 +194,12 @@
   </div>
 
   <div class="admin-tabs">
-    <button class="tab-btn active" onclick="switchTab('notes')">📬 contact notes</button>
-    <button class="tab-btn" onclick="switchTab('projects')">🗂 projects</button>
-    <button class="tab-btn" onclick="switchTab('content')">✏️ content</button>
+    <button class="tab-btn active" onclick="switchTab('notes')">contact notes</button>
+    <button class="tab-btn" onclick="switchTab('projects')">projects</button>
+    <button class="tab-btn" onclick="switchTab('content')">content</button>
   </div>
 
-  <!-- notes tab -->
+  <!-- NOTES TAB -->
   <div id="tab-notes" class="tab-content active">
     <div class="section-head">
       <h2>contact notes</h2>
@@ -210,7 +210,7 @@
     </div>
   </div>
 
-  <!-- projects tab -->
+  <!-- PROJECTS TAB -->
   <div id="tab-projects" class="tab-content">
     <div class="section-head">
       <h2>projects</h2>
@@ -221,7 +221,7 @@
     </div>
   </div>
 
-  <!-- content tab -->
+  <!-- CONTENT TAB -->
   <div id="tab-content" class="tab-content">
     <div class="content-section">
       <h3>bio</h3>
@@ -274,7 +274,7 @@
   </div>
 </div>
 
-<!-- project form modal -->
+<!-- PROJECT FORM MODAL -->
 <div class="form-modal-overlay" id="project-modal">
   <div class="form-modal">
     <button class="close-x" onclick="closeProjectModal()">✕</button>
@@ -318,7 +318,7 @@
 </div>
 
 <script>
-  // ── config for supabase ──
+  // ── CONFIG — paste your Supabase credentials here ──
   const SUPABASE_URL = 'https://gbacrtxsipblfbltjhdc.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdiYWNydHhzaXBibGZibHRqaGRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1MzI5NjksImV4cCI6MjA5NzEwODk2OX0.um4kTrL0KvGMASmkDHz6H36O1C4V9irUuawnmbxyGI0';
   // ────────────────────────────────────────────────────
@@ -326,7 +326,7 @@
   const { createClient } = supabase;
   const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  // login
+  // LOGIN
   async function login() {
     const email = document.getElementById('email-input').value;
     const pw = document.getElementById('password-input').value;
@@ -361,7 +361,7 @@
     }
   });
 
-  // tabs
+  // TABS
   function switchTab(name) {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
@@ -372,13 +372,13 @@
     if (name === 'content') loadContent();
   }
 
-  // notes
+  // NOTES
   async function loadNotes() {
     const grid = document.getElementById('notes-grid');
     grid.innerHTML = '<div class="loading">loading...</div>';
     const { data, error } = await db.from('contact_notes').select('*').order('created_at', { ascending: false });
     if (error || !data.length) {
-      grid.innerHTML = '<div class="empty-state">no notes yet 📭</div>';
+      grid.innerHTML = '<div class="empty-state">no notes yet</div>';
       return;
     }
     grid.innerHTML = data.map(n => `
@@ -405,20 +405,20 @@
     loadNotes();
   }
 
-  // projects
+  // PROJECTS
   async function loadProjects() {
     const list = document.getElementById('project-list');
     list.innerHTML = '<div class="loading">loading...</div>';
     const { data, error } = await db.from('projects').select('*').order('year', { ascending: false });
     if (error || !data.length) {
-      list.innerHTML = '<div class="empty-state">no projects yet — add one!</div>';
+      list.innerHTML = '<div class="empty-state">no projects yet — add one</div>';
       return;
     }
     list.innerHTML = data.map(p => `
       <div class="project-row">
-        <div class="p-img" style="background:#ECEAE6;display:flex;align-items:center;justify-content:center;font-size:20px;">${p.image ? `<img src="images/${p.image}" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">` : '🗂'}</div>
+        <div class="p-img" style="background:#ECEAE6;display:flex;align-items:center;justify-content:center;font-size:20px;">${p.image ? `<img src="images/${p.image}" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">` : ''}</div>
         <div class="p-info">
-          <div class="p-title">${p.title}${p.featured ? ' ⭐' : ''}</div>
+          <div class="p-title">${p.title}${p.featured ? ' (featured)' : ''}</div>
           <div class="p-desc">${p.description}</div>
           <div class="p-year">${p.year}</div>
         </div>
@@ -478,7 +478,7 @@
     loadProjects();
   }
 
-  // content
+  // CONTENT
   async function loadContent() {
     const { data } = await db.from('site_content').select('*');
     if (!data) return;
