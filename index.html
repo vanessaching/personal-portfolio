@@ -18,7 +18,7 @@
     body.fun-active .normal-mode { display: none; }
     body.fun-active .fun-mode { display: block; }
 
-    /* ── SHARED ── */
+    /* shared styles */
     .section-label {
       font-size: 20px;
       font-weight: 700;
@@ -59,7 +59,7 @@
     .modal-repo { font-size: 13px; color: #1a1a1a; text-decoration: none; border-bottom: 1px solid #ccc; padding-bottom: 2px; }
     .modal-repo:hover { color: #888; border-color: #aaa; }
 
-    /* ── NORMAL MODE ── */
+    /* normal mode */
     .normal-mode { display: block; }
 
     /* header */
@@ -158,7 +158,7 @@
     }
     .form-submit:hover { opacity: 0.8; transform: translateY(-1px); }
 
-    /* ── FUN MODE ── */
+    /* fun mode */
     .fun-mode { display: none; }
 
     .f-cart-wrap {
@@ -266,7 +266,7 @@
 </head>
 <body>
 
-<!-- NORMAL MODE -->
+<!-- normal mode -->
 <div class="normal-mode">
   <header class="n-header">
     <div class="identity">
@@ -357,15 +357,15 @@
         <div class="form-group"><label class="form-label">message</label><textarea class="form-input form-textarea" id="c-message" placeholder="say something!"></textarea></div>
         <button class="form-submit" onclick="submitContact()">send it →</button>
       </div>
-      <div class="cow-placeholder"><span>🐄 delivery cow<br/>image here<br/>(transparent png)</span></div>
+      <div class="cow-placeholder"><span> delivery cow<br/>image here<br/>(transparent png)</span></div>
     </div>
   </section>
 </div>
 
-<!-- FUN MODE -->
+<!-- fun mode -->
 <div class="fun-mode">
   <div class="f-cart-wrap">
-    <div class="f-cart-placeholder">🛒 your drawing goes here — favorite project rolling across</div>
+    <div class="f-cart-placeholder">your drawing goes here — favorite project rolling across</div>
   </div>
   <div class="f-header">
     <div class="f-center">
@@ -373,7 +373,7 @@
         <a href="#f-projects">projects</a>
         <a href="#f-about">about me</a>
       </div>
-      <div class="f-name-placeholder">✨ drop your name png here ✨</div>
+      <div class="f-name-placeholder">drop your name png here</div>
       <div class="f-subtitle">computer science &amp; film student</div>
       <div class="f-nav-right">
         <a href="#f-contact">contact</a>
@@ -424,7 +424,7 @@
   </section>
 </div>
 
-<!-- SHARED MODAL -->
+<!-- shared modal -->
 <div class="modal-overlay" id="modal-overlay" onclick="closeModal()">
   <div class="modal" onclick="event.stopPropagation()">
     <button class="modal-close" onclick="closeModal()">✕</button>
@@ -436,7 +436,7 @@
 </div>
 
 <script>
-  // ── CONFIG — paste your Supabase credentials here ──
+  // ── supabase config──
   const SUPABASE_URL = 'https://gbacrtxsipblfbltjhdc.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdiYWNydHhzaXBibGZibHRqaGRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1MzI5NjksImV4cCI6MjA5NzEwODk2OX0.um4kTrL0KvGMASmkDHz6H36O1C4V9irUuawnmbxyGI0';
   // ────────────────────────────────────────────────────
@@ -444,7 +444,7 @@
   const { createClient } = supabase;
   const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  // ── LOAD CONTENT FROM SUPABASE ──
+  // ── load content from supabase ──
   async function loadSiteContent() {
     const { data } = await db.from('site_content').select('*');
     if (!data) return;
@@ -473,7 +473,7 @@
     }
   }
 
-  // ── LOAD PROJECTS FROM SUPABASE ──
+  // ── load projects from supabase ──
   async function loadProjects() {
     const { data } = await db.from('projects').select('*').order('year', { ascending: false });
     if (!data || !data.length) return;
@@ -493,7 +493,7 @@
       `).join('');
     }
 
-    // fun mode cat grid — place cats at grid positions
+    // fun mode cat grid 
     const catGrid = document.querySelector('.cat-grid');
     if (catGrid) {
       catGrid.innerHTML = '';
@@ -516,7 +516,7 @@
     }
   }
 
-  // ── CONTACT FORM ──
+  // ── contact form ──
   async function submitContact() {
     const name = document.getElementById('c-name')?.value;
     const subject = document.getElementById('c-subject')?.value;
@@ -530,7 +530,7 @@
     document.querySelectorAll('.form-input').forEach(el => el.value = '');
   }
 
-  // ── TOGGLE ──
+  // ── toggle ──
   const sectionMap = {
     'projects': 'f-projects', 'about': 'f-about', 'contact': 'f-contact',
     'f-projects': 'projects', 'f-about': 'about', 'f-contact': 'contact'
