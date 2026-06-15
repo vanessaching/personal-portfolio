@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>vanessa ching</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      background: #F2F0ED;
+    }
+
+    body.fun-active { background: #FDE8EF; }
+    body.fun-active .normal-mode { display: none; }
+    body.fun-active .fun-mode { display: block; }
+
+    /* ── SHARED ── */
+    .section-label {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a1a1a;
+      letter-spacing: -0.02em;
+      margin-bottom: 28px;
+    }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.25);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: #F2F0ED;
+      border-radius: 20px;
+      padding: 44px 40px 40px;
+      width: 500px;
+      max-width: 90vw;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+    .modal-close {
+      position: absolute; top: 18px; right: 22px;
+      background: none; border: none; font-size: 15px;
+      color: #bbb; cursor: pointer; font-family: inherit;
+    }
+    .modal-close:hover { color: #1a1a1a; }
+    .modal-year { font-size: 11px; color: #bbb; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+    .modal-title { font-size: 26px; font-weight: 700; color: #1a1a1a; letter-spacing: -0.02em; margin-bottom: 16px; }
+    .modal-body { font-size: 14px; color: #777; line-height: 1.75; margin-bottom: 32px; }
+    .modal-repo { font-size: 13px; color: #1a1a1a; text-decoration: none; border-bottom: 1px solid #ccc; padding-bottom: 2px; }
+    .modal-repo:hover { color: #888; border-color: #aaa; }
+
+    /* ── NORMAL MODE ── */
+    .normal-mode { display: block; }
+
+    /* header */
+    .n-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 48px;
+      border-bottom: 1px solid #e0ddd9;
+    }
+    .identity h1 { font-size: 20px; font-weight: 700; color: #1a1a1a; letter-spacing: -0.02em; }
+    .identity p { font-size: 13px; color: #888; margin-top: 3px; }
+    nav { display: flex; align-items: center; gap: 8px; }
+    nav a {
+      text-decoration: none; font-size: 13px; color: #555;
+      padding: 7px 16px; border-radius: 999px; border: 1px solid #ddd;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    nav a:hover { background: #1a1a1a; color: #F2F0ED; border-color: #1a1a1a; }
+    .divider { width: 1px; height: 20px; background: #ddd; margin: 0 8px; }
+    .fun-toggle { display: flex; align-items: center; gap: 10px; }
+    .toggle-track {
+      position: relative; width: 44px; height: 24px;
+      background: #ddd; border-radius: 999px; cursor: pointer; transition: background 0.2s;
+    }
+    .toggle-track.active { background: #1a1a1a; }
+    .toggle-thumb { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; background: white; border-radius: 50%; transition: transform 0.2s; }
+    .toggle-track.active .toggle-thumb { transform: translateX(20px); }
+    .fun-label { font-size: 13px; color: #555; transition: color 0.2s; }
+    .fun-label.active { color: #1a1a1a; font-weight: 500; }
+
+    /* projects */
+    .n-projects { padding: 64px 48px; }
+    .project-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .project-card {
+      background: #ECEAE6; border-radius: 16px; overflow: hidden;
+      cursor: pointer; transition: box-shadow 0.2s, transform 0.2s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    }
+    .project-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.11); transform: translateY(-3px); }
+    .project-img { width: 100%; height: 180px; background: #dedad4; }
+    .project-info { padding: 18px 20px 22px; }
+    .project-year { font-size: 11px; color: #bbb; letter-spacing: 0.06em; text-transform: uppercase; }
+    .project-title { font-size: 15px; font-weight: 600; color: #1a1a1a; margin: 6px 0 5px; }
+    .project-desc { font-size: 12px; color: #aaa; }
+
+    /* about */
+    .n-about { padding: 64px 48px; border-top: 1px solid #e0ddd9; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .about-bio { font-size: 15px; color: #555; line-height: 1.8; margin-bottom: 32px; }
+    .about-text { padding-right: 64px; }
+    .links-box { background: #ECEAE6; border-radius: 14px; padding: 28px 32px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
+    .links-heading { font-size: 13px; font-weight: 700; color: #1a1a1a; margin-bottom: 12px; }
+    .links-list { display: flex; flex-direction: column; gap: 8px; }
+    .link-item {
+      display: flex; justify-content: space-between; align-items: center;
+      text-decoration: none; font-size: 13px; color: #777;
+      padding: 12px 16px; border-radius: 10px; background: #F2F0ED;
+      transition: background 0.15s, color 0.15s;
+    }
+    .link-item:hover { background: #1a1a1a; color: #F2F0ED; }
+    .link-arrow { font-size: 12px; opacity: 0.5; }
+    .about-photo { position: sticky; top: 0; }
+    .photo-placeholder {
+      width: 100%; min-height: 480px; background: #ECEAE6; border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; color: #bbb; box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    }
+
+    /* contact */
+    .n-contact { padding: 64px 48px; border-top: 1px solid #e0ddd9; }
+    .contact-wrap { display: flex; align-items: flex-start; gap: 48px; }
+    .contact-form { flex: 1; max-width: 640px; }
+    .cow-placeholder {
+      flex: 1; align-self: flex-start; height: var(--form-h, 360px);
+      border: 2px dashed #ccc; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 8px; color: #ccc; font-size: 12px; text-align: center; padding: 16px;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+    .form-row .form-group { margin-bottom: 0; }
+    .form-label { font-size: 12px; font-weight: 700; color: #1a1a1a; }
+    .form-input {
+      background: #ECEAE6; border: none; border-radius: 12px; padding: 14px 18px;
+      font-size: 14px; font-family: inherit; color: #1a1a1a; outline: none;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07); width: 100%; transition: box-shadow 0.15s;
+    }
+    .form-input::placeholder { color: #bbb; }
+    .form-input:focus { box-shadow: 0 0 0 2px #1a1a1a; }
+    .form-textarea { resize: none; height: 140px; }
+    .form-submit {
+      margin-top: 8px; background: #1a1a1a; color: #F2F0ED; border: none;
+      border-radius: 999px; padding: 14px 32px; font-size: 14px; font-family: inherit;
+      font-weight: 600; cursor: pointer; transition: opacity 0.15s, transform 0.15s;
+    }
+    .form-submit:hover { opacity: 0.8; transform: translateY(-1px); }
+
+    /* ── FUN MODE ── */
+    .fun-mode { display: none; }
+
+    .f-cart-wrap {
+      overflow: hidden; width: 100%; height: 90px; position: relative;
+      background: #FDE8EF; border-bottom: 2px solid #F4A7C0; display: flex; align-items: center;
+    }
+    .f-cart-placeholder {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: #FBCFDD; border: 2px dashed #F4A7C0; border-radius: 12px;
+      padding: 10px 28px; font-size: 15px; color: #C2557A; white-space: nowrap;
+      animation: cartRoll 6s linear infinite;
+    }
+    @keyframes cartRoll { 0% { left: 100%; } 100% { left: -400px; } }
+
+    .f-header {
+      padding: 10px 48px; border-bottom: 2px solid #F4A7C0;
+      background: #FDE8EF; position: relative;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .f-center { display: flex; flex-direction: column; align-items: center; padding: 10px 0; width: 100%; position: relative; }
+    .f-name-placeholder {
+      background: #FBCFDD; border: 2px dashed #F4A7C0; border-radius: 14px;
+      padding: 12px 40px; font-size: 13px; color: #C2557A; margin-bottom: 6px;
+    }
+    .f-subtitle { font-size: 14px; color: #C2557A; }
+    .f-nav-left { display: flex; gap: 8px; position: absolute; left: 0; top: 50%; transform: translateY(-50%); }
+    .f-nav-right { display: flex; gap: 8px; align-items: center; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+    .f-nav-left a, .f-nav-right a {
+      text-decoration: none; font-size: 13px; color: #C2557A;
+      padding: 7px 16px; border-radius: 999px; border: 1px solid #F4A7C0;
+      transition: background 0.15s, color 0.15s;
+    }
+    .f-nav-left a:hover, .f-nav-right a:hover { background: #E91E8C; color: white; border-color: #E91E8C; }
+    .f-divider { width: 1px; height: 20px; background: #F4A7C0; margin: 0 8px; }
+    .normal-toggle { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+    .normal-toggle-label { font-size: 13px; color: #C2557A; }
+    .toggle-track-fun {
+      position: relative; width: 44px; height: 24px;
+      background: #E91E8C; border-radius: 999px; cursor: pointer;
+    }
+    .toggle-thumb-fun {
+      position: absolute; top: 3px; left: 3px; width: 18px; height: 18px;
+      background: white; border-radius: 50%; transform: translateX(20px);
+    }
+
+    .f-projects { padding: 48px 48px; border-top: 2px solid #F4A7C0; }
+    .f-section-label { font-size: 20px; font-weight: 700; color: #E91E8C; letter-spacing: -0.02em; margin-bottom: 28px; }
+    .cat-house-wrap {
+      position: relative; width: 100%; aspect-ratio: 7/4;
+      background: #FBCFDD; border-radius: 20px; overflow: hidden; border: 2px dashed #F4A7C0;
+    }
+    .cat-house-placeholder {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: #C2557A;
+    }
+    .cat-grid {
+      position: absolute; inset: 0;
+      display: grid; grid-template-columns: repeat(7,1fr); grid-template-rows: repeat(4,1fr);
+    }
+    .cat-cell { display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; }
+    .cat-img {
+      width: 70%; aspect-ratio: 1; background: #FBCFDD; border-radius: 12px;
+      border: 2px dashed #F4A7C0; display: flex; align-items: center; justify-content: center;
+      font-size: 20px; transition: transform 0.2s; position: relative;
+    }
+    .cat-cell:hover .cat-img { transform: scale(1.15); }
+    .cat-tooltip {
+      display: none; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+      background: #E91E8C; color: white; border-radius: 10px; padding: 8px 12px;
+      font-size: 12px; white-space: nowrap; text-align: center; z-index: 10; pointer-events: none;
+    }
+    .cat-tooltip .tip-title { font-weight: 700; display: block; margin-bottom: 2px; }
+    .cat-tooltip .tip-sub { font-size: 10px; color: rgba(255,255,255,0.8); }
+    .cat-cell:hover .cat-tooltip { display: block; }
+
+    .f-about { padding: 48px 48px; border-top: 2px solid #F4A7C0; }
+    .f-about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: stretch; }
+    .frame-wrap {
+      width: 100%; min-height: 400px; background: #FBCFDD; border-radius: 20px;
+      border: 2px dashed #F4A7C0; display: flex; align-items: center; justify-content: center;
+      font-size: 13px; color: #C2557A;
+    }
+    .f-about-right { display: flex; flex-direction: column; }
+    .f-about-bio { font-size: 15px; color: #7A3050; line-height: 1.8; margin-bottom: 32px; }
+    .cows-placeholder {
+      background: #FBCFDD; border: 2px dashed #F4A7C0; border-radius: 16px;
+      padding: 32px 24px; display: flex; align-items: center; justify-content: center;
+      font-size: 13px; color: #C2557A; text-align: center; line-height: 1.8; flex: 1; min-height: 160px;
+    }
+
+    .f-contact { padding: 48px 48px; border-top: 2px solid #F4A7C0; display: flex; flex-direction: column; align-items: center; }
+    .postcard-wrap {
+      position: relative; width: 640px; max-width: 100%; aspect-ratio: 3/2;
+      background: #FBCFDD; border-radius: 20px; border: 2px dashed #F4A7C0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; color: #C2557A; text-align: center; line-height: 1.8; overflow: hidden;
+    }
+    .sleeping-char {
+      position: absolute; bottom: 0; right: 32px; width: 72px; height: 90px;
+      background: #F4A7C0; border-radius: 12px 12px 0 0; border: 2px dashed #E91E8C;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; font-size: 11px; color: #C2557A; text-align: center; gap: 2px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NORMAL MODE -->
+<div class="normal-mode">
+  <header class="n-header">
+    <div class="identity">
+      <h1>vanessa ching</h1>
+      <p>computer science &amp; film student</p>
+    </div>
+    <nav>
+      <a href="#projects">projects</a>
+      <a href="#about">about me</a>
+      <a href="#contact">contact</a>
+      <div class="divider"></div>
+      <div class="fun-toggle">
+        <span class="fun-label" id="fun-label">fun mode</span>
+        <div class="toggle-track" id="toggle" onclick="toggleFun()">
+          <div class="toggle-thumb"></div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <section id="projects" class="n-projects">
+    <h2 class="section-label">projects</h2>
+    <div class="project-grid">
+      <div class="project-card" onclick="openModal('f1 fantasy optimizer','2024','a FastAPI + React app that optimizes F1 fantasy team selections using live race data and predicted performance metrics.','https://github.com/vanessaching')">
+        <div class="project-img"></div>
+        <div class="project-info">
+          <span class="project-year">2024</span>
+          <h3 class="project-title">f1 fantasy optimizer</h3>
+          <p class="project-desc">FastAPI, React, live race data</p>
+        </div>
+      </div>
+      <div class="project-card" onclick="openModal('voice scorekeeper','2024','an AI-powered sports scorekeeping system. uses voice recognition to log game events in real time.','https://github.com/vanessaching')">
+        <div class="project-img"></div>
+        <div class="project-info">
+          <span class="project-year">2024</span>
+          <h3 class="project-title">voice scorekeeper</h3>
+          <p class="project-desc">AI, voice recognition, sports analytics</p>
+        </div>
+      </div>
+      <div class="project-card" onclick="openModal('UE5 vision pipeline','2025','a computer vision pipeline streaming Unreal Engine 5 viewport frames to YOLOv8 for real-time drone actor detection and control.','https://github.com/vanessaching')">
+        <div class="project-img"></div>
+        <div class="project-info">
+          <span class="project-year">2025</span>
+          <h3 class="project-title">UE5 vision pipeline</h3>
+          <p class="project-desc">YOLOv8, Python, Unreal Engine 5</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="n-about">
+    <h2 class="section-label">about me</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="about-bio">hi! i'm vanessa, a rising third year at johns hopkins studying computer science and film. i spend a lot of my time finding ways to make programming feel less like engineering and more like art. whether that's building tools for sports analytics, training computer vision models, or just making something weird and fun, i'm happiest when code becomes a creative thing.</p>
+        <div class="links-box">
+          <p class="links-heading">check out these links!</p>
+          <div class="links-list">
+            <a href="https://www.linkedin.com/in/vanessa-ching-557796240" target="_blank" class="link-item" data-link="linkedin"><span class="link-label">linkedin</span><span class="link-arrow">→</span></a>
+            <a href="https://github.com/vanessaching" target="_blank" class="link-item" data-link="github"><span class="link-label">github</span><span class="link-arrow">→</span></a>
+          </div>
+        </div>
+        <div class="links-box">
+          <p class="links-heading">check out my resume!</p>
+          <div class="links-list">
+            <a href="/resume" class="link-item" data-link="resume"><span class="link-label">view resume</span><span class="link-arrow">→</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="about-photo">
+        <div class="photo-placeholder"><span>your photo here</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="n-contact">
+    <h2 class="section-label">contact me — send a note!</h2>
+    <div class="contact-wrap">
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">name</label><input class="form-input" id="c-name" type="text" placeholder="your name" /></div>
+          <div class="form-group"><label class="form-label">subject</label><input class="form-input" id="c-subject" type="text" placeholder="what's this about?" /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">email</label><input class="form-input" id="c-email" type="email" placeholder="your email" /></div>
+          <div class="form-group"><label class="form-label">phone <span style="color:#bbb;font-weight:400;">(optional)</span></label><input class="form-input" id="c-phone" type="tel" placeholder="your number" /></div>
+        </div>
+        <div class="form-group"><label class="form-label">message</label><textarea class="form-input form-textarea" id="c-message" placeholder="say something!"></textarea></div>
+        <button class="form-submit" onclick="submitContact()">send it →</button>
+      </div>
+      <div class="cow-placeholder"><span>🐄 delivery cow<br/>image here<br/>(transparent png)</span></div>
+    </div>
+  </section>
+</div>
+
+<!-- FUN MODE -->
+<div class="fun-mode">
+  <div class="f-cart-wrap">
+    <div class="f-cart-placeholder">🛒 your drawing goes here — favorite project rolling across</div>
+  </div>
+  <div class="f-header">
+    <div class="f-center">
+      <div class="f-nav-left">
+        <a href="#f-projects">projects</a>
+        <a href="#f-about">about me</a>
+      </div>
+      <div class="f-name-placeholder">✨ drop your name png here ✨</div>
+      <div class="f-subtitle">computer science &amp; film student</div>
+      <div class="f-nav-right">
+        <a href="#f-contact">contact</a>
+        <div class="f-divider"></div>
+        <div class="normal-toggle" onclick="toggleFun()">
+          <span class="normal-toggle-label">normal mode</span>
+          <div class="toggle-track-fun"><div class="toggle-thumb-fun"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="f-projects" class="f-projects">
+    <h2 class="f-section-label">projects</h2>
+    <div class="cat-house-wrap">
+      <div class="cat-house-placeholder">your cat house drawing goes here (1400×800px)</div>
+      <div class="cat-grid">
+        <div class="cat-cell" onclick="openModal('f1 fantasy optimizer','2024','a FastAPI + React app that optimizes F1 fantasy team selections using live race data and predicted performance metrics.','https://github.com/vanessaching')">
+          <div class="cat-img">🐱<div class="cat-tooltip"><span class="tip-title">f1 fantasy optimizer</span><span class="tip-sub">click for more</span></div></div>
+        </div>
+        <div class="cat-cell" onclick="openModal('voice scorekeeper','2024','an AI-powered sports scorekeeping system. uses voice recognition to log game events in real time.','https://github.com/vanessaching')">
+          <div class="cat-img">🐱<div class="cat-tooltip"><span class="tip-title">voice scorekeeper</span><span class="tip-sub">click for more</span></div></div>
+        </div>
+        <div class="cat-cell" onclick="openModal('UE5 vision pipeline','2025','a computer vision pipeline streaming Unreal Engine 5 viewport frames to YOLOv8 for real-time drone actor detection and control.','https://github.com/vanessaching')">
+          <div class="cat-img">🐱<div class="cat-tooltip"><span class="tip-title">UE5 vision pipeline</span><span class="tip-sub">click for more</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="f-about" class="f-about">
+    <h2 class="f-section-label">about me</h2>
+    <div class="f-about-grid">
+      <div class="frame-wrap"><span>your photo + jump animation here</span></div>
+      <div class="f-about-right">
+        <p class="f-about-bio">hi! i'm vanessa, a rising third year at johns hopkins studying computer science and film. i spend a lot of my time finding ways to make programming feel less like engineering and more like art. whether that's building tools for sports analytics, training computer vision models, or just making something weird and fun, i'm happiest when code becomes a creative thing.</p>
+        <div class="cows-placeholder">🐄🐄🐄 drop your three cows transparent png here<br/>linkedin · github · resume</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="f-contact" class="f-contact">
+    <h2 class="f-section-label">contact me — send a note!</h2>
+    <div class="postcard-wrap">
+      <span>your postcard drawing goes here<br/>sleeping vanessa wakes up on submit</span>
+      <div class="sleeping-char">😴<br/>vanessa</div>
+    </div>
+  </section>
+</div>
+
+<!-- SHARED MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal()">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <p class="modal-year" id="modal-year"></p>
+    <h2 class="modal-title" id="modal-title"></h2>
+    <p class="modal-body" id="modal-desc"></p>
+    <a class="modal-repo" id="modal-repo" href="#" target="_blank">view repo →</a>
+  </div>
+</div>
+
+<script>
+  // ── CONFIG — paste your Supabase credentials here ──
+  const SUPABASE_URL = 'https://gbacrtxsipblfbltjhdc.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdiYWNydHhzaXBibGZibHRqaGRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1MzI5NjksImV4cCI6MjA5NzEwODk2OX0.um4kTrL0KvGMASmkDHz6H36O1C4V9irUuawnmbxyGI0';
+  // ────────────────────────────────────────────────────
+
+  const { createClient } = supabase;
+  const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // ── LOAD CONTENT FROM SUPABASE ──
+  async function loadSiteContent() {
+    const { data } = await db.from('site_content').select('*');
+    if (!data) return;
+    const get = (key) => data.find(d => d.key === key)?.value || '';
+
+    const bio = get('bio');
+    if (bio) document.querySelectorAll('.about-bio, .f-about-bio').forEach(el => el.textContent = bio);
+
+    const linkedin = get('linkedin_url');
+    const github = get('github_url');
+    const resume = get('resume_url');
+    if (linkedin) document.querySelectorAll('[data-link="linkedin"]').forEach(el => el.href = linkedin);
+    if (github) document.querySelectorAll('[data-link="github"]').forEach(el => el.href = github);
+    if (resume) document.querySelectorAll('[data-link="resume"]').forEach(el => el.href = resume);
+
+    const normalPhoto = get('normal_photo');
+    if (normalPhoto) {
+      const ph = document.querySelector('.photo-placeholder');
+      if (ph) ph.innerHTML = `<img src="images/${normalPhoto}" style="width:100%;height:100%;object-fit:cover;border-radius:20px;">`;
+    }
+
+    const featuredTitle = get('featured_title');
+    if (featuredTitle) {
+      const cart = document.querySelector('.f-cart-placeholder');
+      if (cart) cart.textContent = '🛒 ' + featuredTitle;
+    }
+  }
+
+  // ── LOAD PROJECTS FROM SUPABASE ──
+  async function loadProjects() {
+    const { data } = await db.from('projects').select('*').order('year', { ascending: false });
+    if (!data || !data.length) return;
+
+    // normal mode grid
+    const grid = document.querySelector('.project-grid');
+    if (grid) {
+      grid.innerHTML = data.map(p => `
+        <div class="project-card" onclick="openModal('${p.title}','${p.year}','${p.long_description || p.description}','${p.repo_url}')">
+          <div class="project-img">${p.image ? `<img src="images/${p.image}" style="width:100%;height:100%;object-fit:cover;">` : ''}</div>
+          <div class="project-info">
+            <span class="project-year">${p.year}</span>
+            <h3 class="project-title">${p.title}</h3>
+            <p class="project-desc">${p.description}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // fun mode cat grid — place cats at grid positions
+    const catGrid = document.querySelector('.cat-grid');
+    if (catGrid) {
+      catGrid.innerHTML = '';
+      data.forEach(p => {
+        const cell = document.createElement('div');
+        cell.className = 'cat-cell';
+        cell.style.gridColumn = p.grid_col || 'auto';
+        cell.style.gridRow = p.grid_row || 'auto';
+        cell.onclick = () => openModal(p.title, p.year, p.long_description || p.description, p.repo_url);
+        cell.innerHTML = `
+          <div class="cat-img">
+            ${p.cat_image ? `<img src="images/${p.cat_image}" style="width:100%;height:100%;object-fit:contain;">` : '🐱'}
+            <div class="cat-tooltip">
+              <span class="tip-title">${p.title}</span>
+              <span class="tip-sub">click for more</span>
+            </div>
+          </div>`;
+        catGrid.appendChild(cell);
+      });
+    }
+  }
+
+  // ── CONTACT FORM ──
+  async function submitContact() {
+    const name = document.getElementById('c-name')?.value;
+    const subject = document.getElementById('c-subject')?.value;
+    const email = document.getElementById('c-email')?.value;
+    const phone = document.getElementById('c-phone')?.value;
+    const message = document.getElementById('c-message')?.value;
+    if (!name || !email || !message) return alert('please fill in name, email, and message');
+
+    await db.from('contact_notes').insert({ name, subject, email, phone, message });
+    alert('sent! thanks for reaching out 🐄');
+    document.querySelectorAll('.form-input').forEach(el => el.value = '');
+  }
+
+  // ── TOGGLE ──
+  const sectionMap = {
+    'projects': 'f-projects', 'about': 'f-about', 'contact': 'f-contact',
+    'f-projects': 'projects', 'f-about': 'about', 'f-contact': 'contact'
+  };
+
+  function getCurrentSection(mode) {
+    const ids = mode === 'normal' ? ['projects','about','contact'] : ['f-projects','f-about','f-contact'];
+    let current = ids[0];
+    for (const id of ids) {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= window.innerHeight * 0.5) current = id;
+    }
+    return current;
+  }
+
+  function toggleFun() {
+    const isFun = document.body.classList.contains('fun-active');
+    const current = getCurrentSection(isFun ? 'fun' : 'normal');
+    const target = sectionMap[current] || (isFun ? 'projects' : 'f-projects');
+    const track = document.getElementById('toggle');
+    const label = document.getElementById('fun-label');
+    if (track) track.classList.toggle('active');
+    if (label) label.classList.toggle('active');
+    document.body.classList.toggle('fun-active');
+    setTimeout(() => {
+      const el = document.getElementById(target);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
+  }
+
+  function openModal(title, year, desc, repo) {
+    document.getElementById('modal-title').textContent = title;
+    document.getElementById('modal-year').textContent = year;
+    document.getElementById('modal-desc').textContent = desc;
+    document.getElementById('modal-repo').href = repo;
+    document.getElementById('modal-overlay').classList.add('open');
+  }
+
+  function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  function sizeCow() {
+    const form = document.querySelector('.contact-form');
+    const btn = document.querySelector('.form-submit');
+    const cow = document.querySelector('.cow-placeholder');
+    if (!form || !cow || !btn) return;
+    cow.style.height = (btn.getBoundingClientRect().top - form.getBoundingClientRect().top) + 'px';
+  }
+  window.addEventListener('load', sizeCow);
+  window.addEventListener('resize', sizeCow);
+
+  window.addEventListener('load', () => {
+    loadSiteContent();
+    loadProjects();
+  });
+</script>
+</body>
+</html>
