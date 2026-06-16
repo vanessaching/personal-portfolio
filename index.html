@@ -641,12 +641,20 @@
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
   function sizeCow() {
-    const form = document.querySelector('.contact-form');
-    const btn = document.querySelector('.form-submit');
-    const cow = document.querySelector('.cow-placeholder');
-    if (!form || !cow || !btn) return;
-    cow.style.height = (btn.getBoundingClientRect().top - form.getBoundingClientRect().top) + 'px';
+  const form = document.querySelector('.contact-form');
+  const btn = document.querySelector('.form-submit');
+  const cow = document.querySelector('.cow-placeholder');
+  if (!form || !cow || !btn) return;
+  const formRect = form.getBoundingClientRect();
+  const btnRect = btn.getBoundingClientRect();
+  const h = btnRect.top - formRect.top;
+  // only apply if it makes sense (side-by-side layout)
+  if (h > 100) {
+    cow.style.height = h + 'px';
+  } else {
+    cow.style.height = ''; // let CSS handle it (defaults to var(--form-h, 360px))
   }
+}
   window.addEventListener('load', sizeCow);
   window.addEventListener('resize', sizeCow);
 
