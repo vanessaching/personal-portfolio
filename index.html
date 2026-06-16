@@ -7,51 +7,18 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      min-height: 100vh;
-      background: #F2F0ED;
-    }
-
+    body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; min-height: 100vh; background: #F2F0ED; }
     body.fun-active { background: #FDE8EF; }
     body.fun-active .normal-mode { display: none; }
     body.fun-active .fun-mode { display: block; }
 
     /* ── shared ── */
-    .section-label {
-      font-size: 20px;
-      font-weight: 700;
-      color: #1a1a1a;
-      letter-spacing: -0.02em;
-      margin-bottom: 28px;
-    }
+    .section-label { font-size: 20px; font-weight: 700; color: #1a1a1a; letter-spacing: -0.02em; margin-bottom: 28px; }
 
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.25);
-      z-index: 100;
-      align-items: center;
-      justify-content: center;
-      backdrop-filter: blur(4px);
-    }
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.25); z-index: 100; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
     .modal-overlay.open { display: flex; }
-    .modal {
-      background: #F2F0ED;
-      border-radius: 20px;
-      padding: 44px 40px 40px;
-      width: 500px;
-      max-width: 90vw;
-      position: relative;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-    }
-    .modal-close {
-      position: absolute; top: 18px; right: 22px;
-      background: none; border: none; font-size: 15px;
-      color: #bbb; cursor: pointer; font-family: inherit;
-    }
+    .modal { background: #F2F0ED; border-radius: 20px; padding: 44px 40px 40px; width: 500px; max-width: 90vw; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+    .modal-close { position: absolute; top: 18px; right: 22px; background: none; border: none; font-size: 15px; color: #bbb; cursor: pointer; font-family: inherit; }
     .modal-close:hover { color: #1a1a1a; }
     .modal-year { font-size: 11px; color: #bbb; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
     .modal-title { font-size: 26px; font-weight: 700; color: #1a1a1a; letter-spacing: -0.02em; margin-bottom: 16px; }
@@ -62,46 +29,26 @@
 
     /* ── normal mode ── */
     .normal-mode { display: block; }
-
-    /* header */
-    .n-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 28px 48px;
-      border-bottom: 1px solid #e0ddd9;
-    }
+    .n-header { display: flex; align-items: center; justify-content: space-between; padding: 28px 48px; border-bottom: 1px solid #e0ddd9; }
     .identity h1 { font-size: 20px; font-weight: 700; color: #1a1a1a; letter-spacing: -0.02em; }
     .identity p { font-size: 13px; color: #888; margin-top: 3px; }
     nav { display: flex; align-items: center; gap: 8px; }
-    nav a {
-      text-decoration: none; font-size: 13px; color: #555;
-      padding: 7px 16px; border-radius: 999px; border: 1px solid #ddd;
-      transition: background 0.15s, color 0.15s, border-color 0.15s;
-    }
+    nav a { text-decoration: none; font-size: 13px; color: #555; padding: 7px 16px; border-radius: 999px; border: 1px solid #ddd; transition: background 0.15s, color 0.15s, border-color 0.15s; }
     nav a:hover { background: #1a1a1a; color: #F2F0ED; border-color: #1a1a1a; }
     .divider { width: 1px; height: 20px; background: #ddd; margin: 0 8px; }
     .fun-toggle { display: flex; align-items: center; gap: 10px; }
-    .toggle-track {
-      position: relative; width: 44px; height: 24px;
-      background: #ddd; border-radius: 999px; cursor: pointer; transition: background 0.2s;
-    }
+    .toggle-track { position: relative; width: 44px; height: 24px; background: #ddd; border-radius: 999px; cursor: pointer; transition: background 0.2s; }
     .toggle-track.active { background: #1a1a1a; }
     .toggle-thumb { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; background: white; border-radius: 50%; transition: transform 0.2s; }
     .toggle-track.active .toggle-thumb { transform: translateX(20px); }
     .fun-label { font-size: 13px; color: #555; transition: color 0.2s; }
     .fun-label.active { color: #1a1a1a; font-weight: 500; }
 
-    /* projects */
     .n-projects { padding: 64px 48px; }
     .project-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
-    .project-card {
-      background: #ECEAE6; border-radius: 16px; overflow: hidden;
-      cursor: pointer; transition: box-shadow 0.2s, transform 0.2s;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
-    }
+    .project-card { background: #ECEAE6; border-radius: 16px; overflow: hidden; cursor: pointer; transition: box-shadow 0.2s, transform 0.2s; box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
     .project-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.11); transform: translateY(-3px); }
-    .project-img { width: 100%; height: 180px; background: #dedad4; }
+    .project-img { width: 100%; height: 180px; background: #dedad4; overflow: hidden; }
     .project-img img { width: 100%; height: 100%; object-fit: cover; }
     .project-info { padding: 18px 20px 22px; }
     .project-year { font-size: 11px; color: #bbb; letter-spacing: 0.06em; text-transform: uppercase; }
@@ -111,13 +58,9 @@
     /* ── experience ── */
     .n-experience { padding: 64px 48px; border-top: 1px solid #e0ddd9; }
     .experience-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
-    .experience-card {
-      background: #ECEAE6; border-radius: 16px; overflow: hidden;
-      cursor: pointer; transition: box-shadow 0.2s, transform 0.2s;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
-    }
+    .experience-card { background: #ECEAE6; border-radius: 16px; overflow: hidden; cursor: pointer; transition: box-shadow 0.2s, transform 0.2s; box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
     .experience-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.11); transform: translateY(-3px); }
-    .experience-img { width: 100%; height: 180px; background: #dedad4; display: flex; align-items: center; justify-content: center; }
+    .experience-img { width: 100%; height: 180px; background: #dedad4; overflow: hidden; }
     .experience-img img { width: 100%; height: 100%; object-fit: cover; }
     .experience-info { padding: 18px 20px 22px; }
     .experience-timeline { font-size: 11px; color: #bbb; letter-spacing: 0.06em; text-transform: uppercase; }
@@ -125,7 +68,7 @@
     .experience-company { font-size: 13px; font-weight: 500; color: #888; margin-bottom: 5px; }
     .experience-desc { font-size: 12px; color: #aaa; }
 
-    /* about */
+    /* ── about ── */
     .n-about { padding: 64px 48px; border-top: 1px solid #e0ddd9; }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
     .about-bio { font-size: 15px; color: #555; line-height: 1.8; margin-bottom: 32px; }
@@ -133,184 +76,214 @@
     .links-box { background: #ECEAE6; border-radius: 14px; padding: 28px 32px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
     .links-heading { font-size: 13px; font-weight: 700; color: #1a1a1a; margin-bottom: 12px; }
     .links-list { display: flex; flex-direction: column; gap: 8px; }
-    .link-item {
-      display: flex; justify-content: space-between; align-items: center;
-      text-decoration: none; font-size: 13px; color: #777;
-      padding: 12px 16px; border-radius: 10px; background: #F2F0ED;
-      transition: background 0.15s, color 0.15s;
-    }
+    .link-item { display: flex; justify-content: space-between; align-items: center; text-decoration: none; font-size: 13px; color: #777; padding: 12px 16px; border-radius: 10px; background: #F2F0ED; transition: background 0.15s, color 0.15s; }
     .link-item:hover { background: #1a1a1a; color: #F2F0ED; }
     .link-arrow { font-size: 12px; opacity: 0.5; }
-    .about-photo { position: sticky; top: 0; }
-    .photo-placeholder {
-     width: 100%; min-height: 150px; background: #ECEAE6; border-radius: 20px;
-     display: flex; align-items: center; justify-content: center;
-     font-size: 13px; color: #bbb; box-shadow: 0 1px 4px rgba(0,0,0,0.07);
-     }
+    /* fun mode link images */
+    .fun-links-img-row { display: flex; gap: 10px; align-items: center; width: 100%; }
+    .fun-links-img-row a { display: block; flex: 1; transition: transform 0.2s; }
+    .fun-links-img-row a:hover { transform: translateY(-4px); }
+    .fun-links-img-row img { width: 100%; border-radius: 10px; }
+    .about-photo { position: sticky; top: 0; display: flex; justify-content: center; }
+    /* flip card */
+    .flip-card { width: 60%; perspective: 1000px; cursor: pointer; }
+    .flip-card-inner { position: relative; width: 100%; transform-style: preserve-3d; transition: transform 0.5s; }
+    .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+    .flip-card-front, .flip-card-back { width: 100%; backface-visibility: hidden; border-radius: 20px; overflow: hidden; }
+    .flip-card-front img, .flip-card-back img { width: 100%; display: block; object-fit: contain; border-radius: 20px; }
+    .flip-card-back { position: absolute; top: 0; left: 0; transform: rotateY(180deg); }
 
-    /* contact */
+    /* ── contact ── */
     .n-contact { padding: 64px 48px; border-top: 1px solid #e0ddd9; }
     .contact-wrap { display: flex; align-items: flex-start; gap: 48px; }
     .contact-form { flex: 1; max-width: 640px; }
-    .cow-placeholder {
-    flex: 1; align-self: flex-start; height: var(--form-h, 360px);
-    border-radius: 16px; overflow: hidden;
-    display: flex; align-items: center; justify-content: center;
-    }
+    .cow-placeholder { flex: 1; align-self: flex-start; height: var(--form-h, 360px); border-radius: 16px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
     .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
     .form-row .form-group { margin-bottom: 0; }
     .form-label { font-size: 12px; font-weight: 700; color: #1a1a1a; }
-    .form-input {
-      background: #ECEAE6; border: none; border-radius: 12px; padding: 14px 18px;
-      font-size: 14px; font-family: inherit; color: #1a1a1a; outline: none;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.07); width: 100%; transition: box-shadow 0.15s;
-    }
+    .form-input { background: #ECEAE6; border: none; border-radius: 12px; padding: 14px 18px; font-size: 14px; font-family: inherit; color: #1a1a1a; outline: none; box-shadow: 0 1px 4px rgba(0,0,0,0.07); width: 100%; transition: box-shadow 0.15s; }
     .form-input::placeholder { color: #bbb; }
     .form-input:focus { box-shadow: 0 0 0 2px #1a1a1a; }
     .form-textarea { resize: none; height: 140px; }
-    .form-submit {
-      margin-top: 8px; background: #1a1a1a; color: #F2F0ED; border: none;
-      border-radius: 999px; padding: 14px 32px; font-size: 14px; font-family: inherit;
-      font-weight: 600; cursor: pointer; transition: opacity 0.15s, transform 0.15s;
-    }
+    .form-submit { margin-top: 8px; background: #1a1a1a; color: #F2F0ED; border: none; border-radius: 999px; padding: 14px 32px; font-size: 14px; font-family: inherit; font-weight: 600; cursor: pointer; transition: opacity 0.15s, transform 0.15s; }
     .form-submit:hover { opacity: 0.8; transform: translateY(-1px); }
 
     /* ── fun mode ── */
     .fun-mode { display: none; }
+    .f-cart-wrap { overflow: hidden; width: 100%; height: 110px; position: relative; background: #FDE8EF; border-bottom: 2px solid #F4A7C0; display: flex; align-items: center; }
+    .f-cart-placeholder { position: absolute; top: 50%; transform: translateY(-50%); height: 80%; white-space: nowrap; display: flex; align-items: center; gap: 16px; animation: cartRoll 7s linear infinite; }
+    .f-cart-placeholder img { height: 100%; width: auto; object-fit: contain; }
+    .f-cart-label { font-size: 14px; font-weight: 700; color: #C2557A; white-space: nowrap; }
+    @keyframes cartRoll { 0% { left: -600px; } 100% { left: 100%; } }
 
-    .f-cart-wrap {
-      overflow: hidden; width: 100%; height: 90px; position: relative;
-      background: #FDE8EF; border-bottom: 2px solid #F4A7C0; display: flex; align-items: center;
-    }
-    .f-cart-placeholder {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      background: #FBCFDD; border: 2px dashed #F4A7C0; border-radius: 12px;
-      padding: 10px 28px; font-size: 15px; color: #C2557A; white-space: nowrap;
-      animation: cartRoll 6s linear infinite;
-    }
-    @keyframes cartRoll { 0% { left: 100%; } 100% { left: -400px; } }
-
-    .f-header {
-      padding: 10px 48px; border-bottom: 2px solid #F4A7C0;
-      background: #FDE8EF; position: relative;
-      display: flex; flex-direction: column; align-items: center;
-    }
-    .f-center { display: flex; flex-direction: column; align-items: center; padding: 10px 0; width: 100%; position: relative; }
-    .f-name-placeholder {
-      background: #FBCFDD; border: 2px dashed #F4A7C0; border-radius: 14px;
-      padding: 12px 40px; font-size: 13px; color: #C2557A; margin-bottom: 6px;
-    }
+    .f-header { padding: 10px 48px; border-bottom: 2px solid #F4A7C0; background: #FDE8EF; }
+    .f-center { display: flex; flex-direction: column; align-items: center; padding: 10px 0; width: 100%; }
+    .f-header-top { display: flex; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 8px; }
+    .f-name-img { height: 80px; object-fit: contain; margin-bottom: 4px; }
     .f-subtitle { font-size: 14px; color: #C2557A; }
-    .f-nav-left { display: flex; gap: 8px; position: absolute; left: 0; top: 50%; transform: translateY(-50%); }
-    .f-nav-right { display: flex; gap: 8px; align-items: center; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
-    .f-nav-left a, .f-nav-right a {
-      text-decoration: none; font-size: 13px; color: #C2557A;
-      padding: 7px 16px; border-radius: 999px; border: 1px solid #F4A7C0;
-      transition: background 0.15s, color 0.15s;
-    }
+    .f-nav-left { display: flex; gap: 8px; }
+    .f-nav-right { display: flex; gap: 8px; align-items: center; }
+    .f-nav-left a, .f-nav-right a { text-decoration: none; font-size: 13px; color: #C2557A; padding: 7px 16px; border-radius: 999px; border: 1px solid #F4A7C0; transition: background 0.15s, color 0.15s; }
     .f-nav-left a:hover, .f-nav-right a:hover { background: #E91E8C; color: white; border-color: #E91E8C; }
     .f-divider { width: 1px; height: 20px; background: #F4A7C0; margin: 0 8px; }
     .normal-toggle { display: flex; align-items: center; gap: 10px; cursor: pointer; }
     .normal-toggle-label { font-size: 13px; color: #C2557A; }
-    .toggle-track-fun {
-      position: relative; width: 44px; height: 24px;
-      background: #E91E8C; border-radius: 999px; cursor: pointer;
-    }
-    .toggle-thumb-fun {
-      position: absolute; top: 3px; left: 3px; width: 18px; height: 18px;
-      background: white; border-radius: 50%; transform: translateX(20px);
-    }
+    .toggle-track-fun { position: relative; width: 44px; height: 24px; background: #E91E8C; border-radius: 999px; cursor: pointer; }
+    .toggle-thumb-fun { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; background: white; border-radius: 50%; transform: translateX(20px); }
 
     .f-projects { padding: 48px 48px; border-top: 2px solid #F4A7C0; }
     .f-section-label { font-size: 20px; font-weight: 700; color: #E91E8C; letter-spacing: -0.02em; margin-bottom: 28px; }
-    .cat-house-wrap {
-      position: relative; width: 100%; aspect-ratio: 7/4;
-      background: #FBCFDD; border-radius: 20px; overflow: hidden; border: 2px dashed #F4A7C0;
+
+    /* free-placement house — slightly smaller */
+    .cat-house-wrap, .exp-house-wrap {
+      position: relative; width: 88%; margin: 0 auto; aspect-ratio: 7/4;
+      border-radius: 20px; overflow: hidden;
     }
-    .cat-house-placeholder {
-      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-      font-size: 18px; color: #C2557A;
+    .cat-house-wrap img.house-bg, .exp-house-wrap img.house-bg {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
     }
-    .cat-grid {
-      position: absolute; inset: 0;
-      display: grid; grid-template-columns: repeat(7,1fr); grid-template-rows: repeat(4,1fr);
+    .house-items { position: absolute; inset: 0; }
+    .house-item {
+      position: absolute; width: 80px; height: 80px;
+      cursor: pointer; transform: translate(-50%, -50%);
+      transition: transform 0.2s;
     }
-    .cat-cell { display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; }
-    .cat-img {
-      width: 70%; aspect-ratio: 1; background: #FBCFDD; border-radius: 12px;
-      border: 2px dashed #F4A7C0; display: flex; align-items: center; justify-content: center;
-      font-size: 20px; transition: transform 0.2s; position: relative;
-    }
-    .cat-cell:hover .cat-img { transform: scale(1.15); }
-    .cat-tooltip {
+    .house-item:hover { transform: translate(-50%, -50%) scale(1.15); }
+    .house-item img { width: 100%; height: 100%; object-fit: contain; }
+    .house-item .item-tooltip {
       display: none; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
       background: #E91E8C; color: white; border-radius: 10px; padding: 8px 12px;
       font-size: 12px; white-space: nowrap; text-align: center; z-index: 10; pointer-events: none;
     }
-    .cat-tooltip .tip-title { font-weight: 700; display: block; margin-bottom: 2px; }
-    .cat-tooltip .tip-sub { font-size: 10px; color: rgba(255,255,255,0.8); }
-    .cat-cell:hover .cat-tooltip { display: block; }
+    .house-item .item-tooltip .tip-title { font-weight: 700; display: block; margin-bottom: 2px; }
+    .house-item .item-tooltip .tip-company { font-size: 11px; color: rgba(255,255,255,0.9); display: block; margin-bottom: 1px; }
+    .house-item .item-tooltip .tip-sub { font-size: 10px; color: rgba(255,255,255,0.8); }
+    .house-item:hover .item-tooltip { display: block; }
 
-    /* ── experience ── */
     .f-experience { padding: 48px 48px; border-top: 2px solid #F4A7C0; }
-    .exp-house-wrap {
-      position: relative; width: 100%; aspect-ratio: 7/4;
-      background: #FBCFDD; border-radius: 20px; overflow: hidden; border: 2px dashed #F4A7C0;
-    }
-    .exp-house-placeholder {
-      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-      font-size: 18px; color: #C2557A;
-    }
-    .exp-grid {
-      position: absolute; inset: 0;
-      display: grid; grid-template-columns: repeat(7,1fr); grid-template-rows: repeat(4,1fr);
-    }
-    .exp-cell { display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; }
-    .exp-obj {
-      width: 70%; aspect-ratio: 1; background: #FBCFDD; border-radius: 12px;
-      border: 2px dashed #F4A7C0; display: flex; align-items: center; justify-content: center;
-      font-size: 20px; transition: transform 0.2s; position: relative;
-    }
-    .exp-obj img { width: 100%; height: 100%; object-fit: contain; }
-    .exp-cell:hover .exp-obj { transform: scale(1.15); }
-    .exp-tooltip {
-      display: none; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
-      background: #E91E8C; color: white; border-radius: 10px; padding: 8px 12px;
-      font-size: 12px; white-space: nowrap; text-align: center; z-index: 10; pointer-events: none;
-    }
-    .exp-tooltip .tip-title { font-weight: 700; display: block; margin-bottom: 2px; }
-    .exp-tooltip .tip-company { font-size: 11px; color: rgba(255,255,255,0.9); display: block; margin-bottom: 1px; }
-    .exp-tooltip .tip-sub { font-size: 10px; color: rgba(255,255,255,0.8); }
-    .exp-cell:hover .exp-tooltip { display: block; }
 
+    /* fun about */
     .f-about { padding: 48px 48px; border-top: 2px solid #F4A7C0; }
     .f-about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: stretch; }
-    .frame-wrap {
-      width: 100%; min-height: 400px; background: #FBCFDD; border-radius: 20px;
-      border: 2px dashed #F4A7C0; display: flex; align-items: center; justify-content: center;
-      font-size: 13px; color: #C2557A;
-    }
     .f-about-right { display: flex; flex-direction: column; }
     .f-about-bio { font-size: 15px; color: #7A3050; line-height: 1.8; margin-bottom: 32px; }
-    .cows-placeholder {
-      background: #FBCFDD; border: 2px dashed #F4A7C0; border-radius: 16px;
-      padding: 32px 24px; display: flex; align-items: center; justify-content: center;
-      font-size: 13px; color: #C2557A; text-align: center; line-height: 1.8; flex: 1; min-height: 160px;
-    }
+    /* fun flip card */
+    .fun-flip-card { width: 100%; min-height: 400px; perspective: 1000px; cursor: pointer; }
+    .fun-flip-inner { position: relative; width: 100%; height: 100%; min-height: 400px; transform-style: preserve-3d; transition: transform 0.5s; }
+    .fun-flip-card:hover .fun-flip-inner { transform: rotateY(180deg); }
+    .fun-flip-front, .fun-flip-back { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 20px; overflow: hidden; }
+    .fun-flip-front img, .fun-flip-back img { width: 100%; height: 100%; object-fit: contain; border-radius: 20px; }
+    .fun-flip-back { transform: rotateY(180deg); }
 
+    /* postcard contact */
     .f-contact { padding: 48px 48px; border-top: 2px solid #F4A7C0; display: flex; flex-direction: column; align-items: center; }
     .postcard-wrap {
-      position: relative; width: 640px; max-width: 100%; aspect-ratio: 3/2;
-      background: #FBCFDD; border-radius: 20px; border: 2px dashed #F4A7C0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 13px; color: #C2557A; text-align: center; line-height: 1.8; overflow: hidden;
+      position: relative; width: 760px; max-width: 100%; aspect-ratio: 3/2;
+      border-radius: 20px; overflow: hidden;
     }
-    .sleeping-char {
-      position: absolute; bottom: 0; right: 32px; width: 72px; height: 90px;
-      background: #F4A7C0; border-radius: 12px 12px 0 0; border: 2px dashed #E91E8C;
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column; font-size: 11px; color: #C2557A; text-align: center; gap: 2px;
+    .postcard-wrap img.postcard-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .postcard-form {
+      position: absolute;
+      left: 50%; right: 4%; top: 30%; bottom: 10%;
+      display: flex; flex-direction: column;
+      gap: 0; z-index: 1;
+    }
+    .postcard-input {
+      background: transparent; border: none; border-bottom: 2px solid #5B8DB8;
+      padding: 4px 4px 2px; font-size: 15px; font-family: inherit; color: #1a1a1a;
+      outline: none; width: 100%; margin-bottom: 12px;
+    }
+    .postcard-input::placeholder { color: #999; font-size: 14px; }
+    .postcard-textarea { resize: none; flex: 1; font-size: 15px; margin-bottom: 8px; min-height: 48px; }
+    .postcard-submit {
+      align-self: flex-end;
+      background: #5B8DB8; color: white; border: none;
+      border-radius: 999px; padding: 6px 18px; font-size: 11px; font-family: inherit;
+      font-weight: 600; cursor: pointer; transition: opacity 0.15s;
+    }
+    .postcard-submit:hover { opacity: 0.8; }
+
+    /* ── responsive ── */
+
+    /* tablet: ≤ 900px */
+    @media (max-width: 900px) {
+      .n-header { padding: 20px 24px; }
+      nav a { padding: 6px 12px; font-size: 12px; }
+      .n-projects, .n-experience, .n-about, .n-contact { padding: 48px 24px; }
+      .f-projects, .f-experience, .f-about, .f-contact { padding: 36px 24px; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-text { padding-right: 0; }
+      .about-photo { position: static; }
+      .flip-card { width: 50%; margin: 0 auto; }
+      .contact-wrap { flex-direction: column; }
+      .cow-placeholder { width: 100%; height: 200px !important; }
+      .f-about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .fun-flip-card { min-height: 300px; }
+      .fun-flip-inner { min-height: 300px; }
+      .postcard-wrap { width: 100%; }
+      .f-header { padding: 10px 24px; }
+      .f-header-top { flex-wrap: wrap; gap: 8px; }
+      .f-nav-left, .f-nav-right { flex-wrap: wrap; gap: 6px; }
+    }
+
+    /* mobile: ≤ 600px */
+    @media (max-width: 600px) {
+      /* header */
+      .n-header { flex-direction: column; align-items: flex-start; gap: 16px; padding: 18px 16px; }
+      nav { flex-wrap: wrap; gap: 6px; }
+      nav a { font-size: 12px; padding: 6px 12px; }
+
+      /* sections */
+      .n-projects, .n-experience, .n-about, .n-contact { padding: 40px 16px; }
+      .f-projects, .f-experience, .f-about, .f-contact { padding: 32px 16px; }
+
+      /* 2-col grids */
+      .project-grid, .experience-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .project-img, .experience-img { height: 120px; }
+      .project-info, .experience-info { padding: 12px 14px 16px; }
+      .project-title, .experience-role { font-size: 13px; }
+      .project-desc, .experience-desc { font-size: 11px; }
+
+      /* about */
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .about-text { padding-right: 0; }
+      .about-photo { position: static; }
+      .flip-card { width: 60%; margin: 0 auto; }
+
+      /* contact */
+      .contact-wrap { flex-direction: column; }
+      .cow-placeholder { width: 100%; height: 160px !important; }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+
+      /* fun header */
+      .f-header { padding: 10px 16px; }
+      .f-header-top { flex-wrap: wrap; gap: 6px; }
+      .f-nav-left, .f-nav-right { flex-wrap: wrap; gap: 6px; }
+      .f-nav-left a, .f-nav-right a { font-size: 11px; padding: 5px 10px; }
+      .f-name-img { height: 56px; }
+      .f-cart-wrap { height: 80px; }
+
+      /* fun about */
+      .f-about-grid { grid-template-columns: 1fr; gap: 24px; }
+      .fun-flip-card { min-height: 240px; }
+      .fun-flip-inner { min-height: 240px; }
+      .fun-links-img-row { gap: 8px; }
+
+      /* postcard */
+      .postcard-wrap { width: 100%; }
+      .postcard-form { left: 48%; right: 2%; top: 28%; bottom: 8%; }
+      .postcard-input { font-size: 11px; margin-bottom: 6px; }
+      .postcard-textarea { font-size: 11px; }
+      .postcard-submit { font-size: 10px; padding: 4px 12px; }
+
+      /* houses */
+      .cat-house-wrap, .exp-house-wrap { width: 100%; }
+      .house-item { width: 56px; height: 56px; }
+
+      /* modal */
+      .modal { padding: 32px 24px 28px; }
+      .modal-title { font-size: 20px; }
     }
   </style>
 </head>
@@ -402,19 +375,28 @@
         <div class="links-box">
           <p class="links-heading">check out these links!</p>
           <div class="links-list">
-            <a href="https://www.linkedin.com/in/vanessa-ching-557796240" target="_blank" class="link-item" data-link="linkedin"><span class="link-label">linkedin</span><span class="link-arrow">→</span></a>
-            <a href="https://github.com/vanessaching" target="_blank" class="link-item" data-link="github"><span class="link-label">github</span><span class="link-arrow">→</span></a>
+            <a href="https://www.linkedin.com/in/vanessa-ching-557796240" target="_blank" class="link-item" data-link="linkedin"><span>linkedin</span><span class="link-arrow">→</span></a>
+            <a href="https://github.com/vanessaching" target="_blank" class="link-item" data-link="github"><span>github</span><span class="link-arrow">→</span></a>
           </div>
         </div>
         <div class="links-box">
           <p class="links-heading">check out my resume!</p>
           <div class="links-list">
-            <a href="/resume" class="link-item" data-link="resume"><span class="link-label">view resume</span><span class="link-arrow">→</span></a>
+            <a href="/resume" class="link-item" data-link="resume"><span>view resume</span><span class="link-arrow">→</span></a>
           </div>
         </div>
       </div>
       <div class="about-photo">
-        <div class="photo-placeholder"><img src="images/vanessa.png" style="width:60%;object-fit:contain;border-radius:20px;"></div>
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="images/vanessa.png" alt="vanessa">
+            </div>
+            <div class="flip-card-back">
+              <img src="images/vanessa.png" alt="vanessa">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -442,91 +424,88 @@
 <!-- fun mode -->
 <div class="fun-mode">
   <div class="f-cart-wrap">
-    <div class="f-cart-placeholder">your drawing goes here — favorite project rolling across</div>
+    <div class="f-cart-placeholder">
+      <img src="images/cat-flying.png">
+      <span class="f-cart-label">view my favorite project!</span>
+    </div>
   </div>
   <div class="f-header">
     <div class="f-center">
-      <div class="f-nav-left">
-        <a href="#f-projects">projects</a>
-        <a href="#f-experience">experience</a>
-        <a href="#f-about">about me</a>
-      </div>
-      <div class="f-name-placeholder">name.png</div>
-      <div class="f-subtitle">computer science &amp; film student</div>
-      <div class="f-nav-right">
-        <a href="#f-contact">contact</a>
-        <div class="f-divider"></div>
-        <div class="normal-toggle" onclick="toggleFun()">
-          <span class="normal-toggle-label">normal mode</span>
-          <div class="toggle-track-fun"><div class="toggle-thumb-fun"></div></div>
+      <div class="f-header-top">
+        <div class="f-nav-left">
+          <a href="#f-projects">projects</a>
+          <a href="#f-experience">experience</a>
+          <a href="#f-about">about me</a>
+        </div>
+        <div class="f-nav-right">
+          <a href="#f-contact">contact</a>
+          <div class="f-divider"></div>
+          <div class="normal-toggle" onclick="toggleFun()">
+            <span class="normal-toggle-label">normal mode</span>
+            <div class="toggle-track-fun"><div class="toggle-thumb-fun"></div></div>
+          </div>
         </div>
       </div>
+      <img src="images/name.png" class="f-name-img" alt="vanessa ching">
+      <div class="f-subtitle">computer science &amp; film student</div>
     </div>
   </div>
 
   <section id="f-projects" class="f-projects">
     <h2 class="f-section-label">projects</h2>
-    <div class="cat-house-wrap">
-      <div class="cat-house-placeholder">cat-house.png</div>
-      <div class="cat-grid" id="cat-grid">
-        <div class="cat-cell" onclick="openModal('f1 fantasy optimizer','2024','a FastAPI + React app that optimizes F1 fantasy team selections using live race data and predicted performance metrics.','https://github.com/vanessaching')">
-          <div class="cat-img"><div class="cat-tooltip"><span class="tip-title">f1 fantasy optimizer</span><span class="tip-sub">click for more</span></div></div>
-        </div>
-        <div class="cat-cell" onclick="openModal('voice scorekeeper','2024','an AI-powered sports scorekeeping system. uses voice recognition to log game events in real time.','https://github.com/vanessaching')">
-          <div class="cat-img"><div class="cat-tooltip"><span class="tip-title">voice scorekeeper</span><span class="tip-sub">click for more</span></div></div>
-        </div>
-        <div class="cat-cell" onclick="openModal('UE5 vision pipeline','2025','a computer vision pipeline streaming Unreal Engine 5 viewport frames to YOLOv8 for real-time drone actor detection and control.','https://github.com/vanessaching')">
-          <div class="cat-img"><div class="cat-tooltip"><span class="tip-title">UE5 vision pipeline</span><span class="tip-sub">click for more</span></div></div>
-        </div>
-      </div>
+    <div class="cat-house-wrap" id="cat-house-wrap">
+      <img src="images/cat-house.png" class="house-bg" alt="cat house">
+      <div class="house-items" id="cat-house-items"></div>
     </div>
   </section>
 
   <!-- experience section (fun mode) -->
   <section id="f-experience" class="f-experience">
     <h2 class="f-section-label">experience</h2>
-    <div class="exp-house-wrap">
-      <div class="exp-house-placeholder">exp-house.png</div>
-      <div class="exp-grid" id="exp-grid">
-        <!-- loaded from supabase; fallback below -->
-        <div class="exp-cell" style="grid-column:1;grid-row:2;" onclick="openModal('AI Computer Vision Intern','Summer 2025','Building a computer vision pipeline using YOLOv8 integrated with Unreal Engine 5 for real-time drone simulation and actor detection at the Georgia Tech Research Institute.','')">
-          <div class="exp-obj">
-            <div class="exp-tooltip">
-              <span class="tip-title">AI CV Intern</span>
-              <span class="tip-company">GTRI</span>
-              <span class="tip-sub">click for more</span>
-            </div>
-          </div>
-        </div>
-        <div class="exp-cell" style="grid-column:3;grid-row:2;" onclick="openModal('Undergraduate Researcher','2024 – present','Building sports analytics tools including an AI-powered voice scorekeeper and data pipelines for real-time game tracking, under faculty mentor Anton Dahbura.','')">
-          <div class="exp-obj">
-            <div class="exp-tooltip">
-              <span class="tip-title">Undergrad Researcher</span>
-              <span class="tip-company">JHU Sports Analytics</span>
-              <span class="tip-sub">click for more</span>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="exp-house-wrap" id="exp-house-wrap">
+      <img src="images/exp-house.png" class="house-bg" alt="exp house">
+      <div class="house-items" id="exp-house-items"></div>
     </div>
   </section>
 
   <section id="f-about" class="f-about">
     <h2 class="f-section-label">about me</h2>
     <div class="f-about-grid">
-      <div class="frame-wrap"><span>vanessa-fun.png</span></div>
+      <div class="fun-flip-card">
+        <div class="fun-flip-inner">
+          <div class="fun-flip-front"><img src="images/vanessa-fun.png" alt="vanessa fun"></div>
+          <div class="fun-flip-back"><img src="images/vanessa-fun-1.png" alt="vanessa fun alt"></div>
+        </div>
+      </div>
       <div class="f-about-right">
         <p class="f-about-bio">hi! i'm vanessa, a rising third year at johns hopkins studying computer science and film. i spend a lot of my time finding ways to make programming feel less like engineering and more like art. whether that's building tools for sports analytics, training computer vision models, or just making something weird and fun, i'm happiest when code becomes a creative thing.</p>
-        <div class="cows-placeholder">cows-banner.png</div>
+        <div class="fun-links-img-row">
+          <a href="https://www.linkedin.com/in/vanessa-ching-557796240" target="_blank" data-link="linkedin">
+            <img src="images/linkedin.png" alt="linkedin">
+          </a>
+          <a href="https://github.com/vanessaching" target="_blank" data-link="github">
+            <img src="images/github.png" alt="github">
+          </a>
+          <a href="/resume" target="_blank" data-link="resume">
+            <img src="images/resume.png" alt="resume">
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- postcard contact -->
   <section id="f-contact" class="f-contact">
     <h2 class="f-section-label">contact me — send a note!</h2>
     <div class="postcard-wrap">
-      <span>postcard.png</span>
-      <div class="sleeping-char">sleeping-vanessa.png</div>
+      <img src="images/postcard.png" class="postcard-bg" alt="postcard">
+      <div class="postcard-form">
+        <input class="postcard-input" id="pc-name" type="text" placeholder="name" />
+        <input class="postcard-input" id="pc-email" type="email" placeholder="email" />
+        <input class="postcard-input" id="pc-subject" type="text" placeholder="subject" />
+        <textarea class="postcard-input postcard-textarea" id="pc-message" placeholder="your message..."></textarea>
+        <button class="postcard-submit" onclick="submitPostcard()">send ✉</button>
+      </div>
     </div>
   </section>
 </div>
@@ -545,40 +524,23 @@
 <script>
   const SUPABASE_URL = 'https://gbacrtxsipblfbltjhdc.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdiYWNydHhzaXBibGZibHRqaGRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1MzI5NjksImV4cCI6MjA5NzEwODk2OX0.um4kTrL0KvGMASmkDHz6H36O1C4V9irUuawnmbxyGI0';
-
   const { createClient } = supabase;
   const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  // ── load content from supabase ──
   async function loadSiteContent() {
     const { data } = await db.from('site_content').select('*');
     if (!data) return;
     const get = (key) => data.find(d => d.key === key)?.value || '';
-
     const bio = get('bio');
     if (bio) document.querySelectorAll('.about-bio, .f-about-bio').forEach(el => el.textContent = bio);
-
     const linkedin = get('linkedin_url');
     const github = get('github_url');
     const resume = get('resume_url');
     if (linkedin) document.querySelectorAll('[data-link="linkedin"]').forEach(el => el.href = linkedin);
     if (github) document.querySelectorAll('[data-link="github"]').forEach(el => el.href = github);
     if (resume) document.querySelectorAll('[data-link="resume"]').forEach(el => el.href = resume);
-
-    const normalPhoto = get('normal_photo');
-    if (normalPhoto) {
-      const ph = document.querySelector('.photo-placeholder');
-      if (ph) ph.innerHTML = `<img src="images/${normalPhoto}" style="width:60%;object-fit:contain;border-radius:20px;">`;
-    }
-
-    const featuredTitle = get('featured_title');
-    if (featuredTitle) {
-      const cart = document.querySelector('.f-cart-placeholder');
-      if (cart) cart.textContent = featuredTitle;
-    }
   }
 
-  // ── load projects from supabase ──
   async function loadProjects() {
     const { data } = await db.from('projects').select('*').order('sort_order', { ascending: true }).order('year', { ascending: false });
     if (!data || !data.length) return;
@@ -587,44 +549,39 @@
     if (grid) {
       grid.innerHTML = data.map(p => `
         <div class="project-card" onclick="openModal('${esc(p.title)}','${esc(p.year)}','${esc(p.long_description || p.description)}','${esc(p.repo_url)}')">
-          <div class="project-img">${p.image ? `<img src="images/${p.image}" style="width:100%;height:100%;object-fit:cover;">` : ''}</div>
+          <div class="project-img">${p.image ? `<img src="images/${p.image}">` : ''}</div>
           <div class="project-info">
             <span class="project-year">${p.year}</span>
             <h3 class="project-title">${p.title}</h3>
             <p class="project-desc">${p.description}</p>
           </div>
-        </div>
-      `).join('');
+        </div>`).join('');
     }
 
-    const catGrid = document.getElementById('cat-grid');
-    if (catGrid) {
-      catGrid.innerHTML = '';
+    const container = document.getElementById('cat-house-items');
+    if (container) {
+      container.innerHTML = '';
       data.forEach(p => {
-        const cell = document.createElement('div');
-        cell.className = 'cat-cell';
-        cell.style.gridColumn = p.grid_col || 'auto';
-        cell.style.gridRow = p.grid_row || 'auto';
-        cell.onclick = () => openModal(p.title, p.year, p.long_description || p.description, p.repo_url);
-        cell.innerHTML = `
-          <div class="cat-img">
-            ${p.cat_image ? `<img src="images/${p.cat_image}" style="width:100%;height:100%;object-fit:contain;">` : ''}
-            <div class="cat-tooltip">
-              <span class="tip-title">${p.title}</span>
-              <span class="tip-sub">click for more</span>
-            </div>
+        const el = document.createElement('div');
+        el.className = 'house-item';
+        el.style.left = (p.pos_x ?? 20) + '%';
+        el.style.top = (p.pos_y ?? 50) + '%';
+        el.onclick = () => openModal(p.title, p.year, p.long_description || p.description, p.repo_url);
+        el.innerHTML = `
+          ${p.cat_image ? `<img src="images/${p.cat_image}" alt="${p.title}">` : ''}
+          <div class="item-tooltip">
+            <span class="tip-title">${p.title}</span>
+            <span class="tip-sub">click for more</span>
           </div>`;
-        catGrid.appendChild(cell);
+        container.appendChild(el);
       });
     }
   }
 
-  // ── load experience from supabase ──
   async function loadExperience() {
     const { data } = await db.from('experience').select('*').order('sort_order', { ascending: true });
     if (!data || !data.length) return;
 
-    // normal mode grid
     const expGrid = document.getElementById('experience-grid');
     if (expGrid) {
       expGrid.innerHTML = data.map(e => `
@@ -636,39 +593,32 @@
             <p class="experience-company">${e.company}</p>
             <p class="experience-desc">${e.description}</p>
           </div>
-        </div>
-      `).join('');
+        </div>`).join('');
     }
 
-    // fun mode exp grid
-    const expFunGrid = document.getElementById('exp-grid');
-    if (expFunGrid) {
-      expFunGrid.innerHTML = '';
+    const container = document.getElementById('exp-house-items');
+    if (container) {
+      container.innerHTML = '';
       data.forEach(e => {
-        const cell = document.createElement('div');
-        cell.className = 'exp-cell';
-        cell.style.gridColumn = e.grid_col || 'auto';
-        cell.style.gridRow = e.grid_row || 'auto';
-        cell.onclick = () => openModal(e.role, e.timeline, e.long_description || e.description, '');
-        cell.innerHTML = `
-          <div class="exp-obj">
-            ${e.fun_image ? `<img src="images/${e.fun_image}">` : ''}
-            <div class="exp-tooltip">
-              <span class="tip-title">${e.role}</span>
-              <span class="tip-company">${e.company}</span>
-              <span class="tip-sub">click for more</span>
-            </div>
+        const el = document.createElement('div');
+        el.className = 'house-item';
+        el.style.left = (e.pos_x ?? 20) + '%';
+        el.style.top = (e.pos_y ?? 50) + '%';
+        el.onclick = () => openModal(e.role, e.timeline, e.long_description || e.description, '');
+        el.innerHTML = `
+          ${e.fun_image ? `<img src="images/${e.fun_image}" alt="${e.role}">` : ''}
+          <div class="item-tooltip">
+            <span class="tip-title">${e.role}</span>
+            <span class="tip-company">${e.company}</span>
+            <span class="tip-sub">click for more</span>
           </div>`;
-        expFunGrid.appendChild(cell);
+        container.appendChild(el);
       });
     }
   }
 
-  function esc(str) {
-    return (str || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
-  }
+  function esc(str) { return (str || '').replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
 
-  // ── contact form ──
   async function submitContact() {
     const name = document.getElementById('c-name')?.value;
     const subject = document.getElementById('c-subject')?.value;
@@ -681,7 +631,17 @@
     document.querySelectorAll('.form-input').forEach(el => el.value = '');
   }
 
-  // ── toggle ──
+  async function submitPostcard() {
+    const name = document.getElementById('pc-name')?.value;
+    const email = document.getElementById('pc-email')?.value;
+    const subject = document.getElementById('pc-subject')?.value;
+    const message = document.getElementById('pc-message')?.value;
+    if (!name || !email || !message) return alert('please fill in name, email, and message');
+    await db.from('contact_notes').insert({ name, email, subject, message });
+    alert('note sent!');
+    ['pc-name','pc-email','pc-subject','pc-message'].forEach(id => document.getElementById(id).value = '');
+  }
+
   var sectionMap = {
     'projects': 'f-projects', 'experience': 'f-experience', 'about': 'f-about', 'contact': 'f-contact',
     'f-projects': 'projects', 'f-experience': 'experience', 'f-about': 'about', 'f-contact': 'contact'
@@ -708,10 +668,21 @@
     if (track) track.classList.toggle('active');
     if (label) label.classList.toggle('active');
     document.body.classList.toggle('fun-active');
+    sessionStorage.setItem('mode', document.body.classList.contains('fun-active') ? 'fun' : 'normal');
     setTimeout(() => {
       const el = document.getElementById(target);
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 50);
+  }
+
+  function restoreMode() {
+    if (sessionStorage.getItem('mode') === 'fun') {
+      document.body.classList.add('fun-active');
+      const track = document.getElementById('toggle');
+      const label = document.getElementById('fun-label');
+      if (track) track.classList.add('active');
+      if (label) label.classList.add('active');
+    }
   }
 
   function openModal(title, year, desc, repo) {
@@ -719,12 +690,8 @@
     document.getElementById('modal-year').textContent = year;
     document.getElementById('modal-desc').textContent = desc;
     const repoEl = document.getElementById('modal-repo');
-    if (repo) {
-      repoEl.href = repo;
-      repoEl.classList.remove('hidden');
-    } else {
-      repoEl.classList.add('hidden');
-    }
+    if (repo) { repoEl.href = repo; repoEl.classList.remove('hidden'); }
+    else { repoEl.classList.add('hidden'); }
     document.getElementById('modal-overlay').classList.add('open');
   }
 
@@ -742,6 +709,7 @@
   window.addEventListener('resize', sizeCow);
 
   window.addEventListener('load', () => {
+    restoreMode();
     loadSiteContent();
     loadProjects();
     loadExperience();

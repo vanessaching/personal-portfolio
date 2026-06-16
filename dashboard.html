@@ -9,7 +9,6 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: #F2F0ED; min-height: 100vh; }
 
-    /* login */
     #login-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
     .login-box { background: white; border-radius: 20px; padding: 48px 40px; width: 360px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
     .login-box h1 { font-size: 20px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
@@ -20,7 +19,6 @@
     .login-box button:hover { opacity: 0.8; }
     .login-error { font-size: 12px; color: #E63329; margin-top: 8px; display: none; }
 
-    /* admin layout */
     #admin-screen { display: none; }
     .admin-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; background: #F2F0ED; border-bottom: 1px solid #e0ddd9; position: sticky; top: 0; z-index: 10; }
     .admin-header h1 { font-size: 18px; font-weight: 700; color: #1a1a1a; }
@@ -28,14 +26,13 @@
     .logout-btn { background: none; border: 1px solid #ddd; border-radius: 999px; padding: 7px 16px; font-size: 13px; cursor: pointer; font-family: inherit; color: #555; transition: background 0.15s; }
     .logout-btn:hover { background: #1a1a1a; color: white; border-color: #1a1a1a; }
 
-    .admin-tabs { display: flex; gap: 0; border-bottom: 1px solid #e0ddd9; padding: 0 48px; background: #F2F0ED; }
+    .admin-tabs { display: flex; border-bottom: 1px solid #e0ddd9; padding: 0 48px; background: #F2F0ED; }
     .tab-btn { background: none; border: none; font-family: inherit; font-size: 13px; color: #aaa; padding: 14px 20px; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color 0.15s; }
     .tab-btn.active { color: #1a1a1a; border-bottom-color: #1a1a1a; font-weight: 600; }
 
     .tab-content { display: none; padding: 40px 48px; }
     .tab-content.active { display: block; }
 
-    /* sticky notes */
     .notes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
     .sticky { background: #FFF9C4; border-radius: 4px; padding: 20px; box-shadow: 2px 3px 8px rgba(0,0,0,0.12); position: relative; transform: rotate(var(--r)); min-height: 180px; }
     .sticky .s-name { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
@@ -50,22 +47,17 @@
     .sticky:nth-child(4n+3) { background: #FADADD; --r: -0.5deg; }
     .sticky:nth-child(4n+0) { background: #C5E8F7; --r: 1.1deg; }
 
-    /* projects / experience shared */
     .section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
     .section-head h2 { font-size: 18px; font-weight: 700; color: #1a1a1a; }
     .add-btn { background: #1a1a1a; color: white; border: none; border-radius: 999px; padding: 10px 22px; font-size: 13px; font-family: inherit; font-weight: 600; cursor: pointer; transition: opacity 0.15s; }
     .add-btn:hover { opacity: 0.8; }
+    .edit-positions-btn { background: none; border: 1px solid #1a1a1a; color: #1a1a1a; border-radius: 999px; padding: 10px 22px; font-size: 13px; font-family: inherit; font-weight: 600; cursor: pointer; transition: background 0.15s; margin-right: 8px; }
+    .edit-positions-btn:hover { background: #1a1a1a; color: white; }
 
     .project-list, .experience-list { display: flex; flex-direction: column; gap: 12px; }
-    .project-row, .experience-row {
-      background: white; border-radius: 14px; padding: 20px 24px;
-      display: flex; align-items: center; gap: 20px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-    }
-    .project-row .p-img, .experience-row .e-img {
-      width: 64px; height: 48px; background: #ECEAE6; border-radius: 8px;
-      object-fit: cover; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
-    }
+    .project-row, .experience-row { background: white; border-radius: 14px; padding: 20px 24px; display: flex; align-items: center; gap: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+    .project-row .p-img, .experience-row .e-img { width: 64px; height: 48px; background: #ECEAE6; border-radius: 8px; flex-shrink: 0; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .project-row .p-img img, .experience-row .e-img img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
     .project-row .p-info, .experience-row .e-info { flex: 1; }
     .project-row .p-title, .experience-row .e-title { font-size: 14px; font-weight: 700; color: #1a1a1a; }
     .project-row .p-desc, .experience-row .e-desc { font-size: 12px; color: #aaa; margin-top: 3px; }
@@ -75,21 +67,41 @@
     .edit-btn:hover { background: #1a1a1a; color: white; border-color: #1a1a1a; }
     .del-btn:hover { background: #E63329; color: white; border-color: #E63329; }
 
-    /* drag reorder */
-    .drag-handle {
-      cursor: grab; color: #ccc; font-size: 16px; padding: 0 4px; flex-shrink: 0;
-      user-select: none; transition: color 0.15s; line-height: 1;
-    }
+    .drag-handle { cursor: grab; color: #ccc; font-size: 16px; padding: 0 4px; flex-shrink: 0; user-select: none; transition: color 0.15s; }
     .drag-handle:hover { color: #888; }
     .drag-handle:active { cursor: grabbing; }
-    .project-row.dragging, .experience-row.dragging {
-      opacity: 0.4; background: #f5f3f0;
-    }
-    .project-row.drag-over, .experience-row.drag-over {
-      border-top: 2px solid #1a1a1a;
-    }
+    .project-row.dragging, .experience-row.dragging { opacity: 0.4; background: #f5f3f0; }
+    .project-row.drag-over, .experience-row.drag-over { border-top: 2px solid #1a1a1a; }
 
-    /* modal form */
+    /* position editor */
+    .pos-editor-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 300; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
+    .pos-editor-overlay.open { display: flex; }
+    .pos-editor { background: #F2F0ED; border-radius: 20px; padding: 32px; width: 760px; max-width: 95vw; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+    .pos-editor h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .pos-editor p { font-size: 12px; color: #aaa; margin-bottom: 16px; }
+    .pos-editor .close-x { position: absolute; top: 18px; right: 22px; background: none; border: none; font-size: 15px; color: #bbb; cursor: pointer; }
+    .pos-house {
+      position: relative; width: 100%; aspect-ratio: 7/4;
+      border-radius: 16px; overflow: hidden; margin-bottom: 16px;
+      border: 2px solid #e0ddd9;
+    }
+    .pos-house img.house-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .pos-item {
+      position: absolute; transform: translate(-50%, -50%);
+      cursor: grab; user-select: none;
+    }
+    .pos-item:active { cursor: grabbing; }
+    .pos-item img { width: 60px; height: 60px; object-fit: contain; pointer-events: none; display: block; }
+    .pos-item .pos-label {
+      background: rgba(0,0,0,0.6); color: white; font-size: 10px;
+      border-radius: 6px; padding: 2px 6px; text-align: center;
+      white-space: nowrap; pointer-events: none; margin-top: 2px;
+    }
+    .pos-item.no-img { width: 60px; height: 60px; background: #E91E8C; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 10px; text-align: center; }
+    .pos-save-btn { background: #1a1a1a; color: white; border: none; border-radius: 999px; padding: 12px 28px; font-size: 13px; font-family: inherit; font-weight: 600; cursor: pointer; transition: opacity 0.15s; }
+    .pos-save-btn:hover { opacity: 0.8; }
+    .pos-saved-msg { font-size: 12px; color: #2E9E3F; margin-left: 12px; display: none; }
+
     .form-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 200; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
     .form-modal-overlay.open { display: flex; }
     .form-modal { background: #F2F0ED; border-radius: 20px; padding: 40px; width: 520px; max-width: 90vw; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
@@ -107,7 +119,6 @@
     .featured-check { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #555; }
     .featured-check input { width: 16px; height: 16px; cursor: pointer; }
 
-    /* content editor */
     .content-section { background: white; border-radius: 16px; padding: 28px 32px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
     .content-section h3 { font-size: 15px; font-weight: 700; color: #1a1a1a; margin-bottom: 20px; }
     .update-btn { background: #1a1a1a; color: white; border: none; border-radius: 999px; padding: 10px 22px; font-size: 13px; font-family: inherit; font-weight: 600; cursor: pointer; margin-top: 12px; transition: opacity 0.15s; }
@@ -135,21 +146,17 @@
 <!-- admin -->
 <div id="admin-screen">
   <div class="admin-header">
-    <div>
-      <h1>admin</h1>
-      <p>vanessa ching / portfolio</p>
-    </div>
+    <div><h1>admin</h1><p>vanessa ching / portfolio</p></div>
     <button class="logout-btn" onclick="logout()">log out</button>
   </div>
-
   <div class="admin-tabs">
-    <button class="tab-btn active" onclick="switchTab('notes', this)">contact notes</button>
-    <button class="tab-btn" onclick="switchTab('projects', this)">projects</button>
-    <button class="tab-btn" onclick="switchTab('experience', this)">experience</button>
-    <button class="tab-btn" onclick="switchTab('content', this)">content</button>
+    <button class="tab-btn active" onclick="switchTab('notes',this)">contact notes</button>
+    <button class="tab-btn" onclick="switchTab('projects',this)">projects</button>
+    <button class="tab-btn" onclick="switchTab('experience',this)">experience</button>
+    <button class="tab-btn" onclick="switchTab('content',this)">content</button>
   </div>
 
-  <!-- note tab -->
+  <!-- notes tab -->
   <div id="tab-notes" class="tab-content active">
     <div class="section-head">
       <h2>contact notes</h2>
@@ -158,11 +165,14 @@
     <div id="notes-grid" class="notes-grid"><div class="loading">loading notes...</div></div>
   </div>
 
-  <!-- project tab -->
+  <!-- projects tab -->
   <div id="tab-projects" class="tab-content">
     <div class="section-head">
       <h2>projects</h2>
-      <button class="add-btn" onclick="openProjectModal()">+ add project</button>
+      <div>
+        <button class="edit-positions-btn" onclick="openPosEditor('projects')">edit positions</button>
+        <button class="add-btn" onclick="openProjectModal()">+ add project</button>
+      </div>
     </div>
     <div id="project-list" class="project-list"><div class="loading">loading projects...</div></div>
   </div>
@@ -171,7 +181,10 @@
   <div id="tab-experience" class="tab-content">
     <div class="section-head">
       <h2>experience</h2>
-      <button class="add-btn" onclick="openExperienceModal()">+ add experience</button>
+      <div>
+        <button class="edit-positions-btn" onclick="openPosEditor('experience')">edit positions</button>
+        <button class="add-btn" onclick="openExperienceModal()">+ add experience</button>
+      </div>
     </div>
     <div id="experience-list" class="experience-list"><div class="loading">loading experience...</div></div>
   </div>
@@ -197,18 +210,26 @@
     <div class="content-section">
       <h3>photos</h3>
       <div class="f-row">
-        <div class="f-group"><label class="f-label">normal mode photo filename</label><input class="f-input" id="normal-photo" placeholder="e.g. photo.jpg" /><span class="f-hint">place in /images/</span></div>
-        <div class="f-group"><label class="f-label">fun mode photo filename</label><input class="f-input" id="fun-photo" placeholder="e.g. fun-photo.png" /><span class="f-hint">transparent png recommended</span></div>
+        <div class="f-group"><label class="f-label">normal mode photo</label><input class="f-input" id="normal-photo" placeholder="e.g. vanessa.png" /><span class="f-hint">place in /images/</span></div>
+        <div class="f-group"><label class="f-label">fun mode photo</label><input class="f-input" id="fun-photo" placeholder="e.g. vanessa-fun.png" /><span class="f-hint">transparent png recommended</span></div>
       </div>
       <button class="update-btn" onclick="updateContent('photos')">save photos</button>
       <p class="success-msg" id="photos-success">saved!</p>
     </div>
-    <div class="content-section">
-      <h3>featured project (fun mode cart)</h3>
-      <div class="f-group"><label class="f-label">featured project title</label><input class="f-input" id="featured-title" /></div>
-      <button class="update-btn" onclick="updateContent('featured')">save</button>
-      <p class="success-msg" id="featured-success">saved!</p>
+  </div>
+</div>
+
+<!-- position editor modal -->
+<div class="pos-editor-overlay" id="pos-editor-overlay">
+  <div class="pos-editor">
+    <button class="close-x" onclick="closePosEditor()">✕</button>
+    <h3 id="pos-editor-title">edit positions</h3>
+    <p>drag items anywhere on the background image. click save when done.</p>
+    <div class="pos-house" id="pos-house">
+      <img id="pos-house-bg" class="house-bg" src="" alt="background">
     </div>
+    <button class="pos-save-btn" onclick="savePosEditor()">save positions</button>
+    <span class="pos-saved-msg" id="pos-saved-msg">saved!</span>
   </div>
 </div>
 
@@ -223,15 +244,11 @@
       <div class="f-group"><label class="f-label">year</label><input class="f-input" id="p-year" placeholder="2025" /></div>
     </div>
     <div class="f-group"><label class="f-label">short description</label><input class="f-input" id="p-desc" placeholder="tools, stack, one liner" /></div>
-    <div class="f-group"><label class="f-label">full description</label><textarea class="f-textarea" id="p-long-desc" placeholder="longer description shown in the modal"></textarea></div>
-    <div class="f-group"><label class="f-label">image filename</label><input class="f-input" id="p-image" placeholder="e.g. f1-optimizer.jpg" /><span class="f-hint">place in /images/</span></div>
+    <div class="f-group"><label class="f-label">full description</label><textarea class="f-textarea" id="p-long-desc"></textarea></div>
+    <div class="f-group"><label class="f-label">image filename</label><input class="f-input" id="p-image" placeholder="e.g. f1.jpg" /><span class="f-hint">place in /images/</span></div>
     <div class="f-group"><label class="f-label">repo url</label><input class="f-input" id="p-repo" placeholder="https://github.com/..." /></div>
-    <div class="f-group"><label class="f-label">cat image filename (fun mode)</label><input class="f-input" id="p-cat" placeholder="e.g. cat-orange.png" /><span class="f-hint">transparent png of your cat drawing</span></div>
-    <div class="f-row">
-      <div class="f-group"><label class="f-label">grid column (1–7)</label><input class="f-input" id="p-col" type="number" min="1" max="7" placeholder="1" /></div>
-      <div class="f-group"><label class="f-label">grid row (1–4)</label><input class="f-input" id="p-row" type="number" min="1" max="4" placeholder="1" /></div>
-    </div>
-    <div class="f-group"><label class="featured-check"><input type="checkbox" id="p-featured" /> featured project (shows in fun mode cart)</label></div>
+    <div class="f-group"><label class="f-label">cat image (fun mode)</label><input class="f-input" id="p-cat" placeholder="e.g. cat-orange.png" /><span class="f-hint">transparent png</span></div>
+    <div class="f-group"><label class="featured-check"><input type="checkbox" id="p-featured" /> featured project</label></div>
     <button class="save-btn" onclick="saveProject()">save project</button>
   </div>
 </div>
@@ -246,16 +263,12 @@
       <div class="f-group"><label class="f-label">role / title</label><input class="f-input" id="e-role" placeholder="Software Engineer Intern" /></div>
       <div class="f-group"><label class="f-label">company</label><input class="f-input" id="e-company" placeholder="Company Name" /></div>
     </div>
-    <div class="f-group"><label class="f-label">timeline</label><input class="f-input" id="e-timeline" placeholder="Summer 2025 · or · Jan 2024 – May 2024" /></div>
+    <div class="f-group"><label class="f-label">timeline</label><input class="f-input" id="e-timeline" placeholder="Summer 2025" /></div>
     <div class="f-group"><label class="f-label">short description</label><input class="f-input" id="e-desc" placeholder="tools, skills, one liner" /></div>
-    <div class="f-group"><label class="f-label">full description</label><textarea class="f-textarea" id="e-long-desc" placeholder="longer description shown in the modal"></textarea></div>
-    <div class="f-group"><label class="f-label">image filename (normal mode)</label><input class="f-input" id="e-image" placeholder="e.g. gtri-logo.jpg" /><span class="f-hint">company logo or photo — place in /images/</span></div>
-    <div class="f-group"><label class="f-label">fun mode object image filename</label><input class="f-input" id="e-fun-image" placeholder="e.g. briefcase-doodle.png" /><span class="f-hint">your custom object drawing — transparent png</span></div>
-    <div class="f-row">
-      <div class="f-group"><label class="f-label">grid column (1–7)</label><input class="f-input" id="e-col" type="number" min="1" max="7" placeholder="1" /></div>
-      <div class="f-group"><label class="f-label">grid row (1–4)</label><input class="f-input" id="e-row" type="number" min="1" max="4" placeholder="1" /></div>
-    </div>
-    <div class="f-group"><label class="f-label">sort order</label><input class="f-input" id="e-sort" type="number" min="0" placeholder="0 = first" /><span class="f-hint">controls order in normal mode grid</span></div>
+    <div class="f-group"><label class="f-label">full description</label><textarea class="f-textarea" id="e-long-desc"></textarea></div>
+    <div class="f-group"><label class="f-label">image filename (normal mode)</label><input class="f-input" id="e-image" placeholder="e.g. gtri-logo.jpg" /><span class="f-hint">place in /images/</span></div>
+    <div class="f-group"><label class="f-label">fun mode object image</label><input class="f-input" id="e-fun-image" placeholder="e.g. briefcase.png" /><span class="f-hint">transparent png</span></div>
+    <div class="f-group"><label class="f-label">sort order</label><input class="f-input" id="e-sort" type="number" min="0" placeholder="0 = first" /></div>
     <button class="save-btn" onclick="saveExperience()">save experience</button>
   </div>
 </div>
@@ -263,11 +276,9 @@
 <script>
   const SUPABASE_URL = 'https://gbacrtxsipblfbltjhdc.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdiYWNydHhzaXBibGZibHRqaGRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1MzI5NjksImV4cCI6MjA5NzEwODk2OX0.um4kTrL0KvGMASmkDHz6H36O1C4V9irUuawnmbxyGI0';
-
   const { createClient } = supabase;
   const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  // login
   async function login() {
     const email = document.getElementById('email-input').value;
     const pw = document.getElementById('password-input').value;
@@ -299,7 +310,6 @@
     }
   });
 
-  // tabs
   function switchTab(name, btn) {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
@@ -322,7 +332,7 @@
         <button class="s-delete" onclick="deleteNote('${n.id}')">✕</button>
         <div class="s-name">${n.name}</div>
         <div class="s-email">${n.email}${n.phone ? ' · ' + n.phone : ''}</div>
-        <div class="s-subject">${n.subject}</div>
+        <div class="s-subject">${n.subject || ''}</div>
         <div class="s-msg">${n.message}</div>
         <div class="s-date">${new Date(n.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>
       </div>`).join('');
@@ -354,9 +364,9 @@
     const list = document.getElementById('project-list');
     list.innerHTML = projectData.map((p, i) => `
       <div class="project-row" draggable="true" data-index="${i}" data-id="${p.id}"
-           ondragstart="onDragStart(event,'project')" ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event,'project')" ondragend="onDragEnd(event,'project')">
-        <span class="drag-handle" title="drag to reorder">⠿</span>
-        <div class="p-img">${p.image ? `<img src="images/${p.image}" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">` : ''}</div>
+           ondragstart="onDragStart(event,'project')" ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event,'project')" ondragend="onDragEnd()">
+        <span class="drag-handle">⠿</span>
+        <div class="p-img">${p.image ? `<img src="images/${p.image}">` : ''}</div>
         <div class="p-info">
           <div class="p-title">${p.title}${p.featured ? ' (featured)' : ''}</div>
           <div class="p-desc">${p.description}</div>
@@ -370,9 +380,7 @@
   }
 
   async function saveProjectOrder() {
-    await Promise.all(projectData.map((p, i) =>
-      db.from('projects').update({ sort_order: i }).eq('id', p.id)
-    ));
+    await Promise.all(projectData.map((p, i) => db.from('projects').update({ sort_order: i }).eq('id', p.id)));
   }
 
   function openProjectModal(p) {
@@ -385,8 +393,6 @@
     document.getElementById('p-image').value = p?.image || '';
     document.getElementById('p-repo').value = p?.repo_url || '';
     document.getElementById('p-cat').value = p?.cat_image || '';
-    document.getElementById('p-col').value = p?.grid_col || '';
-    document.getElementById('p-row').value = p?.grid_row || '';
     document.getElementById('p-featured').checked = p?.featured || false;
     document.getElementById('project-modal').classList.add('open');
   }
@@ -404,10 +410,8 @@
       image: document.getElementById('p-image').value,
       repo_url: document.getElementById('p-repo').value,
       cat_image: document.getElementById('p-cat').value,
-      grid_col: parseInt(document.getElementById('p-col').value) || 1,
-      grid_row: parseInt(document.getElementById('p-row').value) || 1,
       featured: document.getElementById('p-featured').checked,
-      sort_order: id ? undefined : projectData.length, // new items go to end
+      sort_order: id ? undefined : projectData.length,
     };
     if (id) { await db.from('projects').update(payload).eq('id', id); }
     else { await db.from('projects').insert(payload); }
@@ -435,9 +439,9 @@
     const list = document.getElementById('experience-list');
     list.innerHTML = experienceData.map((e, i) => `
       <div class="experience-row" draggable="true" data-index="${i}" data-id="${e.id}"
-           ondragstart="onDragStart(event,'experience')" ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event,'experience')" ondragend="onDragEnd(event,'experience')">
-        <span class="drag-handle" title="drag to reorder">⠿</span>
-        <div class="e-img">${e.image ? `<img src="images/${e.image}" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">` : ''}</div>
+           ondragstart="onDragStart(event,'experience')" ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event,'experience')" ondragend="onDragEnd()">
+        <span class="drag-handle">⠿</span>
+        <div class="e-img">${e.image ? `<img src="images/${e.image}">` : ''}</div>
         <div class="e-info">
           <div class="e-title">${e.role} · ${e.company}</div>
           <div class="e-desc">${e.description}</div>
@@ -451,9 +455,7 @@
   }
 
   async function saveExperienceOrder() {
-    await Promise.all(experienceData.map((e, i) =>
-      db.from('experience').update({ sort_order: i }).eq('id', e.id)
-    ));
+    await Promise.all(experienceData.map((e, i) => db.from('experience').update({ sort_order: i }).eq('id', e.id)));
   }
 
   function openExperienceModal(e) {
@@ -466,8 +468,6 @@
     document.getElementById('e-long-desc').value = e?.long_description || '';
     document.getElementById('e-image').value = e?.image || '';
     document.getElementById('e-fun-image').value = e?.fun_image || '';
-    document.getElementById('e-col').value = e?.grid_col || '';
-    document.getElementById('e-row').value = e?.grid_row || '';
     document.getElementById('e-sort').value = e?.sort_order ?? '';
     document.getElementById('experience-modal').classList.add('open');
   }
@@ -485,8 +485,6 @@
       long_description: document.getElementById('e-long-desc').value,
       image: document.getElementById('e-image').value,
       fun_image: document.getElementById('e-fun-image').value,
-      grid_col: parseInt(document.getElementById('e-col').value) || 1,
-      grid_row: parseInt(document.getElementById('e-row').value) || 1,
       sort_order: parseInt(document.getElementById('e-sort').value) || 0,
     };
     if (id) { await db.from('experience').update(payload).eq('id', id); }
@@ -510,7 +508,6 @@
     document.getElementById('resume-url').value = get('resume_url');
     document.getElementById('normal-photo').value = get('normal_photo');
     document.getElementById('fun-photo').value = get('fun_photo');
-    document.getElementById('featured-title').value = get('featured_title');
   }
 
   async function updateContent(section) {
@@ -525,7 +522,6 @@
         { key: 'normal_photo', value: document.getElementById('normal-photo').value },
         { key: 'fun_photo', value: document.getElementById('fun-photo').value },
       ],
-      featured: [{ key: 'featured_title', value: document.getElementById('featured-title').value }],
     };
     for (const item of updates[section]) {
       await db.from('site_content').upsert({ key: item.key, value: item.value }, { onConflict: 'key' });
@@ -535,23 +531,109 @@
     setTimeout(() => msg.style.display = 'none', 2000);
   }
 
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { closeProjectModal(); closeExperienceModal(); }
-  });
+  // ── position editor ──
+  let posEditorType = null;
+  let posEditorData = [];
+  let activeDragItem = null;
+  let dragOffsetX = 0, dragOffsetY = 0;
 
-  // ── drag to reorder ──
+  function openPosEditor(type) {
+    posEditorType = type;
+    posEditorData = type === 'projects' ? [...projectData] : [...experienceData];
+    const bgSrc = type === 'projects' ? 'images/cat-house.png' : 'images/exp-house.png';
+    document.getElementById('pos-house-bg').src = bgSrc;
+    document.getElementById('pos-editor-title').textContent = type === 'projects' ? 'edit project positions' : 'edit experience positions';
+    renderPosItems();
+    document.getElementById('pos-editor-overlay').classList.add('open');
+  }
+
+  function closePosEditor() {
+    document.getElementById('pos-editor-overlay').classList.remove('open');
+    activeDragItem = null;
+  }
+
+  function renderPosItems() {
+    const house = document.getElementById('pos-house');
+    document.querySelectorAll('.pos-item').forEach(el => el.remove());
+
+    posEditorData.forEach((item, i) => {
+      const el = document.createElement('div');
+      el.className = 'pos-item';
+      el.dataset.index = i;
+      el.style.left = (item.pos_x ?? 20) + '%';
+      el.style.top = (item.pos_y ?? 50) + '%';
+
+      const imgSrc = posEditorType === 'projects' ? item.cat_image : item.fun_image;
+      const label = posEditorType === 'projects' ? item.title : item.role;
+
+      if (imgSrc) {
+        el.innerHTML = `<img src="images/${imgSrc}" alt="${label}"><div class="pos-label">${label}</div>`;
+      } else {
+        el.classList.add('no-img');
+        el.textContent = label;
+      }
+
+      el.addEventListener('mousedown', startDragItem);
+      house.appendChild(el);
+    });
+  }
+
+  function startDragItem(e) {
+    e.preventDefault();
+    activeDragItem = e.currentTarget;
+    const house = document.getElementById('pos-house');
+    const rect = house.getBoundingClientRect();
+    const itemRect = activeDragItem.getBoundingClientRect();
+    dragOffsetX = e.clientX - itemRect.left - itemRect.width / 2;
+    dragOffsetY = e.clientY - itemRect.top - itemRect.height / 2;
+
+    document.addEventListener('mousemove', moveDragItem);
+    document.addEventListener('mouseup', stopDragItem);
+  }
+
+  function moveDragItem(e) {
+    if (!activeDragItem) return;
+    const house = document.getElementById('pos-house');
+    const rect = house.getBoundingClientRect();
+    let x = ((e.clientX - dragOffsetX - rect.left) / rect.width) * 100;
+    let y = ((e.clientY - dragOffsetY - rect.top) / rect.height) * 100;
+    x = Math.max(2, Math.min(98, x));
+    y = Math.max(2, Math.min(98, y));
+    activeDragItem.style.left = x + '%';
+    activeDragItem.style.top = y + '%';
+    const idx = parseInt(activeDragItem.dataset.index);
+    posEditorData[idx].pos_x = parseFloat(x.toFixed(2));
+    posEditorData[idx].pos_y = parseFloat(y.toFixed(2));
+  }
+
+  function stopDragItem() {
+    activeDragItem = null;
+    document.removeEventListener('mousemove', moveDragItem);
+    document.removeEventListener('mouseup', stopDragItem);
+  }
+
+  async function savePosEditor() {
+    const table = posEditorType === 'projects' ? 'projects' : 'experience';
+    await Promise.all(posEditorData.map(item =>
+      db.from(table).update({ pos_x: item.pos_x ?? 20, pos_y: item.pos_y ?? 50 }).eq('id', item.id)
+    ));
+    if (posEditorType === 'projects') projectData = posEditorData;
+    else experienceData = posEditorData;
+    const msg = document.getElementById('pos-saved-msg');
+    msg.style.display = 'inline';
+    setTimeout(() => msg.style.display = 'none', 2000);
+  }
+
+  // ── list drag to reorder ──
   let dragSrcIndex = null;
   let dragType = null;
 
   function onDragStart(event, type) {
-    // don't start drag from buttons
     if (event.target.tagName === 'BUTTON') { event.preventDefault(); return; }
     dragType = type;
-    const row = event.currentTarget;
-    dragSrcIndex = parseInt(row.dataset.index);
-    row.classList.add('dragging');
+    dragSrcIndex = parseInt(event.currentTarget.dataset.index);
+    event.currentTarget.classList.add('dragging');
     event.dataTransfer.effectAllowed = 'move';
-    event.dataTransfer.setData('text/plain', dragSrcIndex);
   }
 
   function onDragOver(event) {
@@ -560,9 +642,7 @@
     event.currentTarget.classList.add('drag-over');
   }
 
-  function onDragLeave(event) {
-    event.currentTarget.classList.remove('drag-over');
-  }
+  function onDragLeave(event) { event.currentTarget.classList.remove('drag-over'); }
 
   function onDrop(event, type) {
     event.preventDefault();
@@ -570,27 +650,22 @@
     if (type !== dragType) return;
     const destIndex = parseInt(event.currentTarget.dataset.index);
     if (dragSrcIndex === null || dragSrcIndex === destIndex) return;
-
     const arr = type === 'project' ? projectData : experienceData;
     const [moved] = arr.splice(dragSrcIndex, 1);
     arr.splice(destIndex, 0, moved);
-
-    if (type === 'project') {
-      renderProjectList();
-      saveProjectOrder();
-    } else {
-      renderExperienceList();
-      saveExperienceOrder();
-    }
+    if (type === 'project') { renderProjectList(); saveProjectOrder(); }
+    else { renderExperienceList(); saveExperienceOrder(); }
     dragSrcIndex = null;
   }
 
-  function onDragEnd(event, type) {
+  function onDragEnd() {
     dragSrcIndex = null;
-    document.querySelectorAll('.project-row, .experience-row').forEach(r => {
-      r.classList.remove('dragging', 'drag-over');
-    });
+    document.querySelectorAll('.project-row, .experience-row').forEach(r => r.classList.remove('dragging', 'drag-over'));
   }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeProjectModal(); closeExperienceModal(); closePosEditor(); }
+  });
 </script>
 </body>
 </html>
