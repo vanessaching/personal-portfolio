@@ -14,7 +14,6 @@
 
     /* ── shared ── */
     .section-label { font-size: 20px; font-weight: 700; color: #1a1a1a; letter-spacing: -0.02em; margin-bottom: 28px; }
-
     .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.25); z-index: 100; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
     .modal-overlay.open { display: flex; }
     .modal { background: #F2F0ED; border-radius: 20px; padding: 44px 40px 40px; width: 500px; max-width: 90vw; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
@@ -48,7 +47,7 @@
     .project-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
     .project-card { background: #ECEAE6; border-radius: 16px; overflow: hidden; cursor: pointer; transition: box-shadow 0.2s, transform 0.2s; box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
     .project-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.11); transform: translateY(-3px); }
-    .project-img { width: 100%; height: 180px; background: #dedad4; overflow: hidden; }
+    .project-img { width: 100%; height: 220px; background: #dedad4; overflow: hidden; }
     .project-img img { width: 100%; height: 100%; object-fit: cover; }
     .project-info { padding: 18px 20px 22px; }
     .project-year { font-size: 11px; color: #bbb; letter-spacing: 0.06em; text-transform: uppercase; }
@@ -60,7 +59,7 @@
     .experience-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
     .experience-card { background: #ECEAE6; border-radius: 16px; overflow: hidden; cursor: pointer; transition: box-shadow 0.2s, transform 0.2s; box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
     .experience-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.11); transform: translateY(-3px); }
-    .experience-img { width: 100%; height: 180px; background: #dedad4; overflow: hidden; }
+    .experience-img { width: 100%; height: 140px; background: #dedad4; overflow: hidden; }
     .experience-img img { width: 100%; height: 100%; object-fit: cover; }
     .experience-info { padding: 18px 20px 22px; }
     .experience-timeline { font-size: 11px; color: #bbb; letter-spacing: 0.06em; text-transform: uppercase; }
@@ -79,19 +78,11 @@
     .link-item { display: flex; justify-content: space-between; align-items: center; text-decoration: none; font-size: 13px; color: #777; padding: 12px 16px; border-radius: 10px; background: #F2F0ED; transition: background 0.15s, color 0.15s; }
     .link-item:hover { background: #1a1a1a; color: #F2F0ED; }
     .link-arrow { font-size: 12px; opacity: 0.5; }
-    /* fun mode link images */
     .fun-links-img-row { display: flex; gap: 10px; align-items: center; width: 100%; }
     .fun-links-img-row a { display: block; flex: 1; transition: transform 0.2s; }
     .fun-links-img-row a:hover { transform: translateY(-4px); }
     .fun-links-img-row img { width: 100%; border-radius: 10px; }
     .about-photo { position: sticky; top: 0; display: flex; justify-content: center; }
-    /* flip card */
-    .flip-card { width: 60%; perspective: 1000px; cursor: pointer; }
-    .flip-card-inner { position: relative; width: 100%; transform-style: preserve-3d; transition: transform 0.5s; }
-    .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
-    .flip-card-front, .flip-card-back { width: 100%; backface-visibility: hidden; border-radius: 20px; overflow: hidden; }
-    .flip-card-front img, .flip-card-back img { width: 100%; display: block; object-fit: contain; border-radius: 20px; }
-    .flip-card-back { position: absolute; top: 0; left: 0; transform: rotateY(180deg); }
 
     /* ── contact ── */
     .n-contact { padding: 64px 48px; border-top: 1px solid #e0ddd9; }
@@ -112,7 +103,7 @@
     /* ── fun mode ── */
     .fun-mode { display: none; }
     .f-cart-wrap { overflow: hidden; width: 100%; height: 110px; position: relative; background: #FDE8EF; border-bottom: 2px solid #F4A7C0; display: flex; align-items: center; }
-    .f-cart-placeholder { position: absolute; top: 50%; transform: translateY(-50%); height: 80%; white-space: nowrap; display: flex; align-items: center; gap: 16px; animation: cartRoll 7s linear infinite; }
+    .f-cart-placeholder { position: absolute; top: 50%; transform: translateY(-50%); height: 80%; white-space: nowrap; display: flex; align-items: center; gap: 16px; animation: cartRoll 7s linear infinite; cursor: pointer; }
     .f-cart-placeholder img { height: 100%; width: auto; object-fit: contain; }
     .f-cart-label { font-size: 14px; font-weight: 700; color: #C2557A; white-space: nowrap; }
     @keyframes cartRoll { 0% { left: -600px; } 100% { left: 100%; } }
@@ -135,29 +126,18 @@
     .f-projects { padding: 48px 48px; border-top: 2px solid #F4A7C0; }
     .f-section-label { font-size: 20px; font-weight: 700; color: #E91E8C; letter-spacing: -0.02em; margin-bottom: 28px; }
 
-    /* free-placement house — slightly smaller */
-    .cat-house-wrap, .exp-house-wrap {
-      position: relative; width: 88%; margin: 0 auto; aspect-ratio: 7/4;
-      border-radius: 20px; overflow: hidden;
-    }
-    .cat-house-wrap img.house-bg, .exp-house-wrap img.house-bg {
-      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-    }
+    /* free-placement house */
+    .cat-house-wrap, .exp-house-wrap { position: relative; width: 88%; margin: 0 auto; aspect-ratio: 7/4; border-radius: 20px; overflow: hidden; }
+    .cat-house-wrap img.house-bg, .exp-house-wrap img.house-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
     .house-items { position: absolute; inset: 0; }
-    .house-item {
-      position: absolute; width: 80px; height: 80px;
-      cursor: pointer; transform: translate(-50%, -50%);
-      transition: transform 0.2s;
-    }
+    .house-item { position: absolute; width: 80px; height: 80px; cursor: pointer; transform: translate(-50%, -50%); transition: transform 0.2s; overflow: visible; }
     .house-item:hover { transform: translate(-50%, -50%) scale(1.15); }
     .house-item img { width: 100%; height: 100%; object-fit: contain; }
-    .house-item { overflow: visible; }
-    .house-item .item-tooltip { display: none; }
+    .house-item .item-tooltip { display: none; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: #E91E8C; color: white; border-radius: 10px; padding: 8px 14px; white-space: normal; width: 140px; text-align: center; z-index: 10; pointer-events: none; }
     .house-item:hover .item-tooltip { display: block; }
-    .house-item .item-tooltip .tip-title { font-weight: 700; display: block; margin-bottom: 2px; }
-    .house-item .item-tooltip .tip-company { font-size: 11px; color: rgba(255,255,255,0.9); display: block; margin-bottom: 1px; }
-    .house-item .item-tooltip .tip-sub { font-size: 10px; color: rgba(255,255,255,0.8); }
-    .house-item:hover .item-tooltip { display: block; }
+    .house-item .item-tooltip .tip-title { font-weight: 700; display: block; font-size: 12px; margin-bottom: 2px; }
+    .house-item .item-tooltip .tip-company { font-size: 11px; color: rgba(255,255,255,0.9); display: block; margin-bottom: 3px; }
+    .house-item .item-tooltip .tip-sub { font-size: 10px; color: rgba(255,255,255,0.7); display: block; }
 
     .f-experience { padding: 48px 48px; border-top: 2px solid #F4A7C0; }
 
@@ -166,7 +146,6 @@
     .f-about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: stretch; }
     .f-about-right { display: flex; flex-direction: column; }
     .f-about-bio { font-size: 15px; color: #7A3050; line-height: 1.8; margin-bottom: 32px; }
-    /* fun flip card */
     .fun-flip-card { width: 100%; min-height: 400px; perspective: 1000px; cursor: pointer; }
     .fun-flip-inner { position: relative; width: 100%; height: 100%; min-height: 400px; transform-style: preserve-3d; transition: transform 0.5s; }
     .fun-flip-card:hover .fun-flip-inner { transform: rotateY(180deg); }
@@ -176,35 +155,16 @@
 
     /* postcard contact */
     .f-contact { padding: 48px 48px; border-top: 2px solid #F4A7C0; display: flex; flex-direction: column; align-items: center; }
-    .postcard-wrap {
-      position: relative; width: 760px; max-width: 100%; aspect-ratio: 3/2;
-      border-radius: 20px; overflow: hidden;
-    }
+    .postcard-wrap { position: relative; width: 760px; max-width: 100%; aspect-ratio: 3/2; border-radius: 20px; overflow: hidden; }
     .postcard-wrap img.postcard-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-    .postcard-form {
-      position: absolute;
-      left: 50%; right: 4%; top: 30%; bottom: 10%;
-      display: flex; flex-direction: column;
-      gap: 0; z-index: 1;
-    }
-    .postcard-input {
-      background: transparent; border: none; border-bottom: 2px solid #5B8DB8;
-      padding: 4px 4px 2px; font-size: 15px; font-family: inherit; color: #1a1a1a;
-      outline: none; width: 100%; margin-bottom: 12px;
-    }
+    .postcard-form { position: absolute; left: 50%; right: 4%; top: 30%; bottom: 10%; display: flex; flex-direction: column; gap: 0; z-index: 1; }
+    .postcard-input { background: transparent; border: none; border-bottom: 2px solid #5B8DB8; padding: 4px 4px 2px; font-size: 15px; font-family: inherit; color: #1a1a1a; outline: none; width: 100%; margin-bottom: 12px; }
     .postcard-input::placeholder { color: #999; font-size: 14px; }
     .postcard-textarea { resize: none; flex: 1; font-size: 15px; margin-bottom: 8px; min-height: 48px; }
-    .postcard-submit {
-      align-self: flex-end;
-      background: #5B8DB8; color: white; border: none;
-      border-radius: 999px; padding: 6px 18px; font-size: 11px; font-family: inherit;
-      font-weight: 600; cursor: pointer; transition: opacity 0.15s;
-    }
+    .postcard-submit { align-self: flex-end; background: #5B8DB8; color: white; border: none; border-radius: 999px; padding: 6px 18px; font-size: 11px; font-family: inherit; font-weight: 600; cursor: pointer; transition: opacity 0.15s; }
     .postcard-submit:hover { opacity: 0.8; }
 
     /* ── responsive ── */
-
-    /* tablet: ≤ 900px */
     @media (max-width: 900px) {
       .n-header { padding: 20px 24px; }
       nav a { padding: 6px 12px; font-size: 12px; }
@@ -213,7 +173,6 @@
       .about-grid { grid-template-columns: 1fr; gap: 40px; }
       .about-text { padding-right: 0; }
       .about-photo { position: static; }
-      .flip-card { width: 50%; margin: 0 auto; }
       .contact-wrap { flex-direction: column; }
       .cow-placeholder { width: 100%; height: 200px !important; }
       .f-about-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -225,61 +184,41 @@
       .f-nav-left, .f-nav-right { flex-wrap: wrap; gap: 6px; }
     }
 
-    /* mobile: ≤ 600px */
     @media (max-width: 600px) {
-      /* header */
       .n-header { flex-direction: column; align-items: flex-start; gap: 16px; padding: 18px 16px; }
       nav { flex-wrap: wrap; gap: 6px; }
       nav a { font-size: 12px; padding: 6px 12px; }
-
-      /* sections */
       .n-projects, .n-experience, .n-about, .n-contact { padding: 40px 16px; }
       .f-projects, .f-experience, .f-about, .f-contact { padding: 32px 16px; }
-
-      /* 2-col grids */
       .project-grid, .experience-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-      .project-img, .experience-img { height: 120px; }
+      .project-img { height: 120px; }
+      .experience-img { height: 90px; }
       .project-info, .experience-info { padding: 12px 14px 16px; }
       .project-title, .experience-role { font-size: 13px; }
       .project-desc, .experience-desc { font-size: 11px; }
-
-      /* about */
       .about-grid { grid-template-columns: 1fr; gap: 32px; }
       .about-text { padding-right: 0; }
       .about-photo { position: static; }
-      .flip-card { width: 60%; margin: 0 auto; }
-
-      /* contact */
       .contact-wrap { flex-direction: column; }
       .cow-placeholder { width: 100%; height: 160px !important; }
       .form-row { grid-template-columns: 1fr; gap: 0; }
-
-      /* fun header */
       .f-header { padding: 10px 16px; }
       .f-header-top { flex-wrap: wrap; gap: 6px; }
       .f-nav-left, .f-nav-right { flex-wrap: wrap; gap: 6px; }
       .f-nav-left a, .f-nav-right a { font-size: 11px; padding: 5px 10px; }
       .f-name-img { height: 56px; }
       .f-cart-wrap { height: 80px; }
-
-      /* fun about */
       .f-about-grid { grid-template-columns: 1fr; gap: 24px; }
       .fun-flip-card { min-height: 240px; }
       .fun-flip-inner { min-height: 240px; }
       .fun-links-img-row { gap: 8px; }
-
-      /* postcard */
       .postcard-wrap { width: 100%; }
       .postcard-form { left: 48%; right: 2%; top: 28%; bottom: 8%; }
       .postcard-input { font-size: 11px; margin-bottom: 6px; }
       .postcard-textarea { font-size: 11px; }
       .postcard-submit { font-size: 10px; padding: 4px 12px; }
-
-      /* houses */
       .cat-house-wrap, .exp-house-wrap { width: 100%; }
       .house-item { width: 56px; height: 56px; }
-
-      /* modal */
       .modal { padding: 32px 24px 28px; }
       .modal-title { font-size: 20px; }
     }
@@ -385,16 +324,7 @@
         </div>
       </div>
       <div class="about-photo">
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <img src="images/vanessa.png" alt="vanessa">
-            </div>
-            <div class="flip-card-back">
-              <img src="images/vanessa.png" alt="vanessa">
-            </div>
-          </div>
-        </div>
+        <img src="images/vanessa.png" alt="vanessa" style="width:60%;object-fit:contain;border-radius:20px;">
       </div>
     </div>
   </section>
@@ -422,7 +352,7 @@
 <!-- fun mode -->
 <div class="fun-mode">
   <div class="f-cart-wrap">
-    <div class="f-cart-placeholder">
+    <div class="f-cart-placeholder" id="f-cart-placeholder">
       <img src="images/cat-flying.png">
       <span class="f-cart-label">view my favorite project!</span>
     </div>
@@ -542,6 +472,13 @@
   async function loadProjects() {
     const { data } = await db.from('projects').select('*').order('sort_order', { ascending: true }).order('year', { ascending: false });
     if (!data || !data.length) return;
+
+    // wire up featured project banner
+    const featured = data.find(p => p.featured);
+    const banner = document.getElementById('f-cart-placeholder');
+    if (featured && banner) {
+      banner.onclick = () => openModal(featured.title, featured.year, featured.long_description || featured.description, featured.repo_url);
+    }
 
     const grid = document.getElementById('project-grid');
     if (grid) {
